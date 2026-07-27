@@ -631,57 +631,265 @@ stepDown: {
   mistake: "Only thinking about getting in. Half of every drill is the way back out.",
   vid: "how to come down from wall handstand safely",
   fig: { hd:[34,74], nk:[38,70], hp:[50,64], el:[36,82], hn:[36,92], kn:[64,62], ft:[76,60], props:["floor","wallRfar"] }
+},
+
+/* ---------- GLUTES ---------- */
+gluteBridge: {
+  name: "Glute bridge",
+  cat: "Glutes",
+  dose: "3 × 12",
+  why: "The foundation, and secretly a handstand drill: the pelvic tuck that stops your handstand banana-ing is exactly this glute contraction, just upside down. Every rep here is a rep for your line.",
+  how: ["Lie on your back, knees bent, feet flat and hip-width, heels close to your bum.",
+        "Tuck your pelvis first, THEN drive through your heels to lift your hips.",
+        "Squeeze hard at the top for two seconds. Lower under control."],
+  cues: ["Tuck the pelvis before you lift — that's what makes it a glute exercise instead of a low-back one.",
+         "Push through the heels, not the toes.",
+         "If you feel it in your hamstrings, walk your feet closer to your bum."],
+  mistake: "Arching the low back at the top to get higher. Height isn't the goal, the squeeze is.",
+  vid: "glute bridge proper form",
+  fig: { hd:[22,84], nk:[30,84], hp:[58,68], el:[28,90], hn:[20,92], kn:[74,74], ft:[80,92], props:["floor"] }
+},
+
+hipThrust: {
+  name: "Couch hip thrust",
+  cat: "Glutes",
+  dose: "3 × 10",
+  why: "The single best glute-builder you can do at home. Shoulders elevated gives a far bigger range than a floor bridge, and a dumbbell across the hips loads it properly.",
+  how: ["Sit on the floor with your upper back against your couch, feet flat, knees bent.",
+        "Rest a dumbbell across your hips (a folded towel under it saves your hip bones).",
+        "Tuck the pelvis, drive through the heels until your body is a flat tabletop.",
+        "Squeeze 2 seconds at the top, lower under control."],
+  cues: ["Ribs down and chin slightly tucked — look forward, not up.",
+         "Shins vertical at the top; move your feet if they aren't.",
+         "Full lockout: the glutes do the last few degrees."],
+  mistake: "Hyperextending the low back at the top instead of finishing with the glutes.",
+  vid: "hip thrust couch home glute exercise",
+  fig: { hd:[20,58], nk:[28,62], hp:[58,66], el:[26,70], hn:[22,76], kn:[74,70], ft:[80,92], props:["floor","boxL"] }
+},
+
+singleBridge: {
+  name: "Single-leg glute bridge",
+  cat: "Glutes",
+  dose: "3 × 8/side",
+  why: "Doubles the load without any equipment, and exposes the side that's been coasting. Most people have one glute noticeably weaker — this is how you find out and fix it.",
+  how: ["Set up as a glute bridge, then extend one leg straight out or hold that knee to your chest.",
+        "Drive through the planted heel, keeping the hips perfectly level.",
+        "Lower with control. Finish all reps, then swap."],
+  cues: ["Hips stay square — if one side drops, stop the set there.",
+         "Squeeze the working glute at the top; don't let the hamstring take over.",
+         "Slower is harder. Use that before adding reps."],
+  mistake: "Twisting the pelvis to get the hip higher.",
+  vid: "single leg glute bridge form",
+  fig: { hd:[22,84], nk:[30,84], hp:[58,68], el:[28,90], hn:[20,92], kn:[74,74], ft:[80,92], kn2:[70,54], ft2:[82,44], props:["floor"] }
+},
+
+bandWalk: {
+  name: "Banded lateral walk",
+  cat: "Glutes",
+  dose: "3 × 12 steps/direction",
+  why: "Hits the side glutes (glute medius) that bridges and squats miss. These are your pelvis stabilisers — they matter for single-leg work, pistols, and not wobbling in a handstand.",
+  how: ["Loop a band around your legs just above the knees, or around the ankles for more.",
+        "Quarter-squat, chest up, feet hip-width.",
+        "Step sideways, keeping constant tension. 12 steps one way, 12 back."],
+  cues: ["Stay low the whole time — standing up between steps releases the tension.",
+         "Toes point forward; don't let the knees cave in.",
+         "You should feel this on the outside of your hip, burning by step 8."],
+  mistake: "Letting the trailing leg snap in. Control it back.",
+  vid: "banded lateral walk glute medius",
+  fig: { hd:[48,26], nk:[48,34], hp:[48,56], el:[40,44], hn:[36,52], kn:[38,74], ft:[36,92], kn2:[60,74], ft2:[62,92], props:["floor","bandKnee"] }
+},
+
+birdDog: {
+  name: "Bird dog",
+  cat: "Core",
+  dose: "3 × 8/side",
+  why: "Trains glutes and deep core together while teaching the trunk to stay still — the exact skill that keeps a handstand from twisting.",
+  how: ["All fours, back flat, hands under shoulders and knees under hips.",
+        "Extend one arm forward and the opposite leg back, both to shoulder height.",
+        "Hold 3 seconds, return, switch."],
+  cues: ["Imagine a glass of water on your low back — don't spill it.",
+         "Reach long rather than lifting high.",
+         "Squeeze the glute of the extended leg."],
+  mistake: "Lifting the leg so high the low back arches. Hip height is plenty.",
+  vid: "bird dog exercise core stability",
+  fig: { hd:[24,58], nk:[34,62], hp:[62,62], el:[26,56], hn:[14,52], kn:[66,76], ft:[78,88], kn2:[74,58], ft2:[88,52], props:["floor"] }
+},
+
+pallof: {
+  name: "Band Pallof press",
+  cat: "Core",
+  dose: "3 × 8/side, 3 sec hold",
+  why: "Anti-rotation core — resisting a twist rather than making one. This is the quality that stops you corkscrewing out of an arm balance, and bands do it perfectly.",
+  how: ["Anchor a band at chest height (door handle, bannister). Stand side-on, band in both hands at your chest.",
+        "Step out until there's real tension.",
+        "Press your hands straight out in front of you and hold 3 seconds. The band will try to rotate you — don't let it.",
+        "Return to the chest. Finish the set, then face the other way."],
+  cues: ["Squeeze glutes and tuck ribs; the whole body is one rigid column.",
+         "The further you step from the anchor, the harder it gets.",
+         "Breathe normally through the hold."],
+  mistake: "Letting the shoulders rotate toward the anchor.",
+  vid: "pallof press anti rotation core",
+  fig: { hd:[40,28], nk:[40,36], hp:[40,58], el:[52,42], hn:[64,42], kn:[38,76], ft:[38,94], props:["floor","bandSide"] }
+},
+
+/* ---------- CALISTHENICS ---------- */
+lsit: {
+  name: "L-sit progression",
+  cat: "Calisthenics",
+  dose: "5 × 10–20 sec",
+  why: "The best core exercise in calisthenics, and it shares its engine with the handstand: compression and hollow. It needs no equipment and about half a metre of floor. Of your four skill picks, this is the fastest win.",
+  how: ["Level 1 — Foot-supported: sit with legs straight, hands on the floor beside your hips. Press down and lift your BUM only, heels stay on the floor.",
+        "Level 2 — Tuck L-sit: same press, knees tucked to chest, everything off the floor.",
+        "Level 3 — One leg extended, the other tucked. Alternate.",
+        "Level 4 — Full L-sit: both legs straight, parallel to the floor.",
+        "Hands on blocks or books makes every level easier — use them."],
+  cues: ["Push the floor away and DEPRESS the shoulders — think 'push your shoulders away from your ears'.",
+         "Round the low back slightly (hollow), don't sit up tall.",
+         "Point the toes; it engages more than you'd think."],
+  mistake: "Shrugging up into the shoulders. If your ears disappear, reset.",
+  vid: "l sit progression tutorial beginner",
+  fig: { hd:[34,44], nk:[42,50], hp:[58,62], el:[46,64], hn:[46,84], kn:[72,54], ft:[84,62], props:["floor"] }
+},
+
+pistol: {
+  name: "Pistol squat progression",
+  cat: "Calisthenics",
+  dose: "3 × 5–8/side",
+  why: "Enormous glute and single-leg strength, and it doubles as your glute work. Box height is the dial — you lower the surface as you get stronger, so there's never a version you can't do.",
+  how: ["Level 1 — Sit to a high surface on one leg, stand up with both. Control the descent.",
+        "Level 2 — Sit and stand on one leg to a high surface (couch).",
+        "Level 3 — Same to a lower surface; hold a light dumbbell out front as a counterweight.",
+        "Level 4 — Full pistol to the floor.",
+        "Hold a doorframe or band for balance at any level — that's a legitimate regression, not cheating."],
+  cues: ["Push the hips back as you descend; keep the heel down.",
+         "Arms forward as a counterweight — it's mechanics, not a crutch.",
+         "Control the lowering. That's where the strength comes from."],
+  mistake: "Dropping fast and bouncing out of the bottom.",
+  vid: "pistol squat progression beginner",
+  fig: { hd:[30,30], nk:[34,38], hp:[42,60], el:[36,48], hn:[48,50], kn:[52,74], ft:[46,92], kn2:[58,60], ft2:[76,56], props:["floor","boxR"] }
+},
+
+bandRow: {
+  name: "Band row",
+  cat: "Calisthenics",
+  dose: "3 × 12",
+  why: "Your pulling work until a bar exists. It builds the same back and biceps a pull-up needs — the strength transfers, even though the skill itself has to wait.",
+  how: ["Anchor a band low (under a closed door, around a table leg) or sit with it around your feet.",
+        "Pull the handles to your ribs, elbows close to the body.",
+        "Squeeze the shoulder blades together for a beat, then release slowly."],
+  cues: ["Lead with the elbows, not the hands.",
+         "Shoulder blades back and DOWN, not shrugged up.",
+         "Slow on the release — 3 seconds back."],
+  mistake: "Rowing with the arms only and never moving the shoulder blades.",
+  vid: "resistance band row proper form",
+  fig: { hd:[26,50], nk:[34,52], hp:[64,52], el:[40,60], hn:[44,52], kn:[68,74], ft:[70,92], props:["floor","bandFwd"] }
+},
+
+bandPulldown: {
+  name: "Band lat pulldown",
+  cat: "Calisthenics",
+  dose: "3 × 12",
+  why: "The overhead pulling pattern of a pull-up, scaled to what a band can give. Also good for shoulder health under all the pressing this program asks for.",
+  how: ["Anchor a band high — over a door, a curtain rail, or hold it overhead in a doorway.",
+        "Kneel or stand, arms overhead.",
+        "Pull the band down and out to your chest, elbows driving down and back.",
+        "Return slowly, letting the shoulders reach up at the top."],
+  cues: ["Initiate by pulling the shoulder blades DOWN before the elbows bend.",
+         "Ribs down; don't lean back to make it easier.",
+         "Full stretch at the top — that overhead reach is half the value."],
+  mistake: "Leaning back so it becomes a row.",
+  vid: "resistance band lat pulldown form",
+  fig: { hd:[46,40], nk:[46,48], hp:[46,70], el:[36,38], hn:[30,26], el2:[56,38], hn2:[62,26], kn:[52,86], ft:[62,92], props:["floor","bandUp"] }
+},
+
+scapPull: {
+  name: "Scapular pull (band)",
+  cat: "Calisthenics",
+  dose: "3 × 10, 2 sec holds",
+  why: "The step everyone skips on the way to a first pull-up. Before you can pull, you have to be able to control the shoulder blades — most failed pull-ups are a scapular problem, not an arm problem.",
+  how: ["Hold a band anchored overhead, arms straight above you.",
+        "WITHOUT bending your elbows, pull your shoulder blades down and together.",
+        "Hold 2 seconds. Release slowly.",
+        "When you get a bar: same movement hanging, arms straight — that's the real version."],
+  cues: ["Arms stay completely straight. If the elbows bend, you've left the exercise.",
+         "Think 'shoulders away from ears'.",
+         "Small movement. It should feel like almost nothing is happening."],
+  mistake: "Turning it into a pulldown by bending the arms.",
+  vid: "scapular pull ups tutorial",
+  fig: { hd:[48,40], nk:[48,46], hp:[48,68], el:[42,32], hn:[40,18], el2:[54,32], hn2:[56,18], kn:[48,84], ft:[48,94], props:["floor","bandUp"] }
+},
+
+sideCrow: {
+  name: "Side crow",
+  cat: "Skill",
+  dose: "4 attempts/side",
+  why: "The natural next arm balance from crow, and it feeds the anti-rotation core you're building on Day E. Low to the ground, so a failed attempt is a roll, not a fall.",
+  how: ["Squat with feet together, twist your torso to one side.",
+        "Place both hands on the floor shoulder-width, elbows bent to 90°.",
+        "Rest the outside of one thigh on the shelf made by your upper arm.",
+        "Shift weight forward until the feet float. Look slightly ahead."],
+  cues: ["Bend the elbows to 90° FIRST and make a shelf — most people try to balance on straight arms.",
+         "Twist from the ribcage, keeping the knees stacked together.",
+         "Put a cushion in front of you and it stops being scary."],
+  mistake: "Not twisting enough, so there's no shelf for the leg to sit on.",
+  vid: "side crow parsva bakasana tutorial",
+  fig: { hd:[64,60], nk:[54,58], hp:[34,54], el:[54,72], hn:[52,88], el2:[46,72], hn2:[44,88], kn:[40,68], ft:[24,64], props:["floor"] }
 }
 };
 
-
 /* ---------- SESSION DEFINITIONS ----------
-   Day A is phase-aware: items is a function of the current week, so the app serves
+   Day A is phase-aware: items may be a function of the current week, so the app serves
    the reload block first and only introduces inversion work once it's earned. */
 
 const RELOAD_A = [
   ["wristPrep","3 min"],["dogHold","3 × 30 sec"],["bearHold","3 × 20 sec"],
-  ["plankHold","4 × 15–20 sec"],["deadBug","3 × 8/side"],["shoulderTaps","3 × 8/side"],
+  ["plankHold","4 × 15–20 sec"],["lsit","5 × 10–20 sec"],["shoulderTaps","3 × 8/side"],
   ["boxPike","3 × 20–30 sec"],["stepDown","rehearse the exit"],["crow","3 easy sets"]
 ];
 const SKILL_A = [
   ["wristPrep","3 min"],["thoracic","2 min"],["dogHold","2 × 30 sec"],["hollow","4 × 30 sec"],
-  ["boxPikePush","3 × 5–8"],["partialWall","3 × 3–4 reps"],["wallPlank","3 × 30 sec"],
-  ["chestWall","3 × 30 sec"],["stepDown","every rep"],["crow","4 sets"]
+  ["lsit","5 × 15–20 sec"],["boxPikePush","3 × 5–8"],["partialWall","3 × 3–4 reps"],
+  ["chestWall","3 × 30 sec"],["stepDown","every rep"],["crow","3 sets"],["sideCrow","4/side"]
 ];
 const BALANCE_A = [
-  ["wristPrep","3 min"],["hollow","4 × 30 sec"],["chestWall","4 × 40 sec"],
-  ["weightShift","5 × 3 sec/hand"],["heelPull","8–10 attempts"],["stepDown","every rep"],["crow","4 sets"]
+  ["wristPrep","3 min"],["hollow","4 × 30 sec"],["lsit","4 × 20 sec"],["chestWall","4 × 40 sec"],
+  ["weightShift","5 × 3 sec/hand"],["heelPull","8–10 attempts"],["stepDown","every rep"],
+  ["crow","3 sets"],["sideCrow","4/side"]
 ];
 
 const SESSIONS = {
   daily: { id:"daily", name:"Daily 10", sub:"The floor — every day, including rest days", mins:10, color:"#5ee0b0",
     items: w => w<=4
-      ? [["wristPrep","2 min"],["dogHold","2 × 30 sec"],["deadBug","2 × 8/side"],["puppy","3 min (rotate the target)"]]
-      : [["wristPrep","2 min"],["boxPike","3 × 30 sec"],["hollow","3 × 20 sec"],["puppy","3 min (rotate the target)"]] },
+      ? [["wristPrep","2 min"],["dogHold","2 × 30 sec"],["deadBug","2 × 8/side"],["gluteBridge","2 × 12"],["puppy","2 min"]]
+      : [["wristPrep","2 min"],["boxPike","3 × 30 sec"],["hollow","3 × 20 sec"],["gluteBridge","2 × 12"],["puppy","2 min"]] },
 
-  A: { id:"A", name:"Day A — Skill", sub:"45 min · do this fresh, never after strength", mins:45, color:"#7c9cff",
+  A: { id:"A", name:"Day A — Skill", sub:"45 min · handstand, L-sit, arm balances. Do this fresh.", mins:45, color:"#7c9cff",
     items: w => w<=4 ? RELOAD_A : (w<=8 ? SKILL_A : BALANCE_A) },
 
-  B: { id:"B", name:"Day B — Strength", sub:"45 min · dumbbells + bodyweight", mins:45, color:"#f0b45e",
+  B: { id:"B", name:"Day B — Strength", sub:"45 min · push, pull, legs — calisthenics-flavoured", mins:45, color:"#f0b45e",
     items: w => (w<=4
-      ? [["wristPrep","2 min"],["inclinePush","3 × 8–10"],["ohp","3 × 8, light"],["row","3 × 10/side"],
-         ["splitSquat","2 × 8/side"],["rdl","3 × 10"],["deadBug","3 × 8/side"],
-         ["sidePlank","3 × 15 sec/side"],["carry","3 × 30 sec"]]
-      : [["wristPrep","2 min"],["ohp","4 × 8"],["boxPikePush","3 × 6"],["inclinePush","3 × 10"],["row","3 × 10/side"],
-         ["splitSquat","3 × 10/side"],["rdl","3 × 10"],["hollow","3 × 20 reps (rocks)"],
-         ["sidePlank","3 × 30 sec/side"],["carry","3 × 40 sec"]]) },
+      ? [["wristPrep","2 min"],["inclinePush","3 × 8–10"],["bandRow","3 × 12"],["ohp","3 × 8, light"],
+         ["bandPulldown","3 × 12"],["pistol","3 × 5/side, high surface"],["rdl","3 × 10"],
+         ["deadBug","3 × 8/side"],["carry","3 × 30 sec"]]
+      : [["wristPrep","2 min"],["inclinePush","3 × 10"],["bandRow","3 × 12"],["ohp","4 × 8"],
+         ["boxPikePush","3 × 6"],["scapPull","3 × 10"],["bandPulldown","3 × 12"],
+         ["pistol","3 × 6–8/side"],["rdl","3 × 10"],["carry","3 × 40 sec"]]) },
 
   C: { id:"C", name:"Day C — Cardio", sub:"30–40 min · zone 2, no decisions required", mins:35, color:"#e08b8b",
     items: [["cardio","30–40 min"]] },
 
   D: { id:"D", name:"Day D — Flexibility", sub:"45 min · optional but this is how you get it back", mins:45, color:"#b98bde",
-    items: [["jefferson","3 × 8"],["pigeon","90 sec/side"],["couch","90 sec/side"],["deadHang","3 × 25 sec"],
-            ["dislocates","3 × 10"],["puppy","90 sec"],["thoracic","2 min"],["thread","60 sec/side"],
-            ["ankle","2 × 60 sec/side"],["bridge","3 × 25 sec"]] }
+    items: [["jefferson","3 × 8"],["pigeon","90 sec/side"],["couch","90 sec/side"],["dislocates","3 × 10"],
+            ["puppy","90 sec"],["thoracic","2 min"],["thread","60 sec/side"],
+            ["ankle","2 × 60 sec/side"],["bridge","3 × 25 sec"]] },
+
+  E: { id:"E", name:"Day E — Glutes + core", sub:"20–25 min · short, and it feeds the handstand", mins:22, color:"#7ad4c8",
+    items: [["gluteBridge","3 × 12"],["hipThrust","3 × 10"],["singleBridge","3 × 8/side"],
+            ["bandWalk","3 × 12/direction"],["birdDog","3 × 8/side"],["pallof","3 × 8/side"],
+            ["sidePlank","3 × 20 sec/side"]] }
 };
 
-/* Stage 1 is new: nobody skips it, and it's where you actually are today. */
+/* Stage 1 is where you actually are today; nobody skips it. */
 const STAGES = [
   ["Foundations","Rebuild pressing strength and the hollow shape on the ground","4 × 20 sec forearm plank · 3 × 10 incline push-ups · 3 × 30 sec box pike"],
   ["Elevated pike","Box pike push-ups and partial wall walks, feet always supported","3 × 6 box pike push-ups · partial wall walk to hip height, calm"],
@@ -693,8 +901,32 @@ const STAGES = [
   ["Control","Press to handstand, handstand → chaturanga, in flow","Bonus territory"]
 ];
 
+/* Parallel calisthenics goals — each moves at its own pace, independent of the handstand ladder. */
+const LADDERS = [
+  { id:"lsit", name:"L-sit", ex:"lsit", levels:[
+      ["Foot-supported","Lift the bum only, heels stay down","5 × 15 sec"],
+      ["Tuck L-sit","Knees to chest, everything off the floor","3 × 10 sec"],
+      ["One leg out","Alternate the extended leg","3 × 8 sec/side"],
+      ["Full L-sit","Both legs straight and level","10 sec"]] },
+  { id:"pistol", name:"Pistol squat", ex:"pistol", levels:[
+      ["Down on one, up on two","Control the descent to a high surface","3 × 8/side"],
+      ["One leg to couch height","Down and up on the same leg","3 × 6/side"],
+      ["Low surface + counterweight","Light dumbbell held out front","3 × 5/side"],
+      ["Full pistol","All the way to the floor","3 clean reps/side"]] },
+  { id:"pullup", name:"First pull-up", ex:"bandRow", levels:[
+      ["Band work (no bar yet)","Rows, pulldowns, scapular pulls","3 × 12, twice a week"],
+      ["Dead hang","Bar acquired — just hang","30 sec"],
+      ["Scapular pulls + negatives","Lower yourself slowly from the top","5 × 5 sec negatives"],
+      ["First strict pull-up","Chin over bar, no kipping","1 rep"]] },
+  { id:"armbal", name:"Arm balances", ex:"sideCrow", levels:[
+      ["Crow","Steady and unhurried","20 sec"],
+      ["Side crow","Both sides","5 sec each side"],
+      ["Eight-angle","You've had this before — get it back","5 sec each side"],
+      ["Firefly / transitions","Tittibhasana, or crow → chaturanga","Bonus territory"]] }
+];
+
 const PHASES = [
-  [1,4,"Reload","Three months off is real, and this block respects it. Everything stays on the ground or with your feet supported. No falling, no kick-ups, nothing that needs more floor space than a yoga mat."],
+  [1,4,"Reload","Three months off is real, and this block respects it. Everything stays on the ground or with your feet supported. No falling, no kick-ups, nothing needing more floor space than a yoga mat."],
   [5,8,"Elevated","Feet on a chair, then partway up the wall. You still walk out of every position — the exit is always the entry in reverse."],
   [9,12,"Line","Chest-to-wall work once the strength is there to hold it. Expect a plateau around week 10; it's normal."],
   [13,16,"Balance","Weight shifts and heel pulls. Freestanding work only if and when you want it — the program is complete without it."]
@@ -704,9 +936,9 @@ const BENCH = [
   ["plank","Forearm plank hold","sec"],
   ["incline","Incline push-ups (couch height)","reps"],
   ["pike","Box pike hold","sec"],
-  ["fold","Forward fold — how far do the fingers reach?","text"],
-  ["cw","Chest-to-wall handstand hold","sec"],
-  ["ankle","Knee-to-wall ankle","cm"]
+  ["lsit","L-sit hold (current level)","sec"],
+  ["thrust","Hip thrust weight × reps","text"],
+  ["fold","Forward fold — how far do the fingers reach?","text"]
 ];
 
 const RULES = [
@@ -714,5 +946,5 @@ const RULES = [
   ["The Daily 10 always counts","Showing up beats optimising. On a bad day it IS the workout."],
   ["Scared means the drill is wrong, not you","Every position here has a walk-out. If one has no exit you're comfortable with, it's too early — regress it."],
   ["Never train skill work tired","Fatigued reps teach bad patterns. Stop while it still feels crisp."],
-  ["Track the stage, not the day","Moving from Stage 1 to 2 is real progress even in a week you only trained twice."]
+  ["Day E is the one to protect","It's 20 minutes and it feeds everything else. When the week gets busy, drop Day D before Day E."]
 ];

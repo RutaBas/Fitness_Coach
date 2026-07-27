@@ -2,7 +2,7 @@
 
 const KEY = "handstand.state";
 const WEEKS = 16;
-const DEF = { start:null, stage:1, log:{}, holds:[], bench:{}, weekOffset:0, mtime:0 };
+const DEF = { start:null, stage:1, ladders:{}, log:{}, holds:[], bench:{}, weekOffset:0, mtime:0 };
 let S = load();
 let view = { t:"today" };
 let timer = { on:false, sec:0, id:null, ex:null };
@@ -75,6 +75,11 @@ function figure(f, cls){
   if(has("roller"))  p += `<circle cx="46" cy="73" r="7" fill="none" ${gl}/>`;
   if(has("boxR"))    p += `<rect x="62" y="70" width="26" height="24" rx="3" fill="none" ${gl}/>`;
   if(has("boxL"))    p += `<rect x="12" y="62" width="26" height="32" rx="3" fill="none" ${gl}/>`;
+  const bnd = 'stroke="#7c9cff" stroke-width="2.4" fill="none" stroke-linecap="round"';
+  if(has("bandKnee"))p += `<path d="M38 74 Q49 70 60 74" ${bnd}/>`;
+  if(has("bandSide"))p += `<path d="M64 42 L94 42" ${bnd} stroke-dasharray="4 3"/>`;
+  if(has("bandUp"))  p += `<path d="M30 26 L48 6 L62 26" ${bnd} stroke-dasharray="4 3"/>`;
+  if(has("bandFwd")) p += `<path d="M44 52 L14 44" ${bnd} stroke-dasharray="4 3"/>`;
   if(has("bandArc")) p += `<path d="M22 22 Q48 4 74 22" fill="none" stroke="#7c9cff" stroke-width="2.4" stroke-linecap="round"/>`;
 
   const S_ = '#e9eaf0';
@@ -109,7 +114,7 @@ const uid = () => (crypto && crypto.randomUUID) ? crypto.randomUUID()
 /* ---------- screens ---------- */
 function scrToday(){
   const w = currentWeek(), ph = phaseOf(w), c = weekCount(w);
-  const ids = ["daily","A","B","C","D"];
+  const ids = ["daily","A","B","C","D","E"];
   return `
   <h1>The Handstand Project</h1>
   <div class="sub">Week ${w} of ${WEEKS} · ${new Date().toLocaleDateString(undefined,{weekday:"long", month:"short", day:"numeric"})}</div>
@@ -219,8 +224,24 @@ function scrProgress(){
       <div class="exit">Exit test: ${esc(s[2])}</div></div></div>`;}).join("")}
   </div>
   <div class="panel">
-    <h2>Flexibility benchmarks</h2><p class="hint">Retest in weeks 1, 6 and 12. Numbers beat feelings.</p>
-    <table><thead><tr><th>Test</th><th>Wk 1</th><th>Wk 6</th><th>Wk 12</th></tr></thead><tbody>
+    <h2>Skill goals</h2><p class="hint">These move at their own pace, independent of the handstand ladder. Tap the level you're on.</p>
+    ${LADDERS.map(L=>{const cur=S.ladders[L.id]||1;return `
+      <div style="margin-bottom:16px">
+        <div style="display:flex;gap:9px;align-items:center;margin-bottom:7px">
+          <div style="width:34px;flex:0 0 34px">${figure(EX[L.ex].fig)}</div>
+          <b style="font-size:.93rem">${esc(L.name)}</b>
+          <span class="dim" style="margin-left:auto">${cur}/${L.levels.length}</span>
+        </div>
+        <div class="prog"><i style="width:${cur/L.levels.length*100}%"></i></div>
+        ${L.levels.map((lv,i)=>{const n=i+1;return `<div class="stage ${n<cur?"past":(n===cur?"cur":"")}" data-lad="${L.id}:${n}">
+          <div class="snum">${n<cur?"✓":n}</div>
+          <div><div style="font-weight:600;font-size:.9rem">${esc(lv[0])}</div><div class="dim">${esc(lv[1])}</div>
+          <div class="exit">Target: ${esc(lv[2])}</div></div></div>`;}).join("")}
+      </div>`;}).join("")}
+  </div>
+  <div class="panel">
+    <h2>Flexibility benchmarks</h2><p class="hint">Retest in weeks 1, 8 and 16. Numbers beat feelings.</p>
+    <table><thead><tr><th>Test</th><th>Wk 1</th><th>Wk 8</th><th>Wk 16</th></tr></thead><tbody>
     ${BENCH.map(b=>`<tr><td>${esc(b[1])}${b[2]!=="text"?" ("+b[2]+")":""}</td>
       ${["w1","w6","w12"].map(c=>`<td><input type="text" data-bench="${b[0]}.${c}" value="${esc((S.bench[b[0]]||{})[c]||"")}" placeholder="—"></td>`).join("")}
     </tr>`).join("")}
@@ -257,8 +278,8 @@ function scrPlan(){
     <div class="sub">${esc(p[3])}</div></div>`).join("")}
   <div class="panel">
     <h2>The weekly template</h2>
-    <p class="hint">3–4 sessions of 45 min, plus the Daily 10 every day.</p>
-    ${["A","B","C","D"].map(id=>`<div style="padding:9px 0;border-bottom:1px solid var(--line)">
+    <p class="hint">3–4 of the 45-min days, plus Day E and the Daily 10. Day E is short on purpose — protect it.</p>
+    ${["A","B","C","D","E"].map(id=>`<div style="padding:9px 0;border-bottom:1px solid var(--line)">
       <b style="font-size:.9rem;color:${SESSIONS[id].color}">${esc(SESSIONS[id].name)}</b>
       <div class="dim">${esc(SESSIONS[id].sub)}</div></div>`).join("")}
     <p class="hint" style="margin-top:12px">Put A and B on your best-energy days. C is the day for when your brain is fried — no decisions required.</p>
@@ -305,6 +326,9 @@ document.addEventListener("click", e=>{
     render(); return; }
 
   const tg = t.closest("[data-tog]"); if(tg){ toggle(tg.dataset.tog); return; }
+  const ld = t.closest("[data-lad]");
+  if(ld){ const [id,n] = ld.dataset.lad.split(":"); S.ladders[id] = +n; save(); render(); return; }
+
   const st = t.closest("[data-stage]"); if(st){ S.stage = +st.dataset.stage; save(); render(); return; }
   const wk = t.closest("[data-week]"); if(wk){ S.weekOffset = (S.weekOffset||0) + (+wk.dataset.week - currentWeek()); save(); render(); return; }
 
