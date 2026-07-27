@@ -1,5 +1,6 @@
 /* app.js — The Handstand Project */
 
+const APP_VERSION = "v5";
 const KEY = "handstand.state";
 const WEEKS = 16;
 const DEF = { start:null, stage:1, ladders:{}, log:{}, holds:[], bench:{}, weekOffset:0, mtime:0 };
@@ -290,6 +291,17 @@ function scrPlan(){
   </div>
   ${typeof Sync !== "undefined" ? Sync.html() : ""}
   <div class="panel">
+    <h2>Version</h2>
+    <p class="hint">If the app looks out of date, check this against what you deployed.</p>
+    <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line)">
+      <span class="dim">App build</span><b>${APP_VERSION}</b></div>
+    <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line)">
+      <span class="dim">Sessions defined</span><b>${Object.keys(SESSIONS).length} (${Object.keys(SESSIONS).join(", ")})</b></div>
+    <div style="display:flex;justify-content:space-between;padding:7px 0">
+      <span class="dim">Cache</span><b id="cachename">checking…</b></div>
+    <div class="btnrow"><button class="act ghost" data-nav="update">Force update now</button></div>
+  </div>
+  <div class="panel">
     <h2>Data</h2>
     <p class="hint">${typeof Sync !== "undefined" && Sync.signedIn()
       ? "Saved on this device and synced to your account."
@@ -311,6 +323,7 @@ function render(){
   document.querySelectorAll("#nav button").forEach(b=>
     b.classList.toggle("on", b.dataset.t === (view.t==="sess"?"today":view.t)));
   window.scrollTo(0, view.t==="sess" ? 0 : window._sy||0);
+  if(view.t==="plan") showCache();
 }
 
 document.getElementById("nav").addEventListener("click", e=>{
@@ -355,6 +368,7 @@ document.addEventListener("click", e=>{
     else if(a==="quit"){ view = {t:"today"}; }
     else if(a==="finish"){ if(!doneToday(view.id)) toggle(view.id); view={t:"today"}; }
     else if(a==="lib"){ view={t:"library"}; }
+    else if(a==="update"){ forceUpdate(); return; }
     else if(a==="export"){ exportData(); return; }
     else if(a==="wipe"){ if(confirm("Delete all logged progress on this device?")){ S=Object.assign({},DEF); save(); view={t:"today"}; } }
     render(); return;
@@ -380,6 +394,27 @@ function startTimer(k){
   }, 1000);
 }
 function stopTimer(){ timer.on=false; clearInterval(timer.id); timer.id=null; }
+
+/* ---------- cache / update ---------- */
+async function showCache(){
+  const el = document.getElementById("cachename"); if(!el) return;
+  try{
+    const keys = await caches.keys();
+    el.textContent = keys.length ? keys.join(", ") : "none (fresh load)";
+  }catch(e){ el.textContent = "unavailable"; }
+}
+async function forceUpdate(){
+  toast("Clearing cache…");
+  try{
+    const keys = await caches.keys();
+    await Promise.all(keys.map(k => caches.delete(k)));
+    if("serviceWorker" in navigator){
+      const regs = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(r => r.unregister()));
+    }
+  }catch(e){}
+  location.reload(true);
+}
 
 /* ---------- export ---------- */
 function exportData(){
