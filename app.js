@@ -1,9 +1,9 @@
 /* app.js — The Handstand Project */
 
-const APP_VERSION = "v5";
+const APP_VERSION = "v8";
 const KEY = "handstand.state";
 const WEEKS = 16;
-const DEF = { start:null, stage:1, ladders:{}, log:{}, holds:[], bench:{}, weekOffset:0, mtime:0 };
+const DEF = { start:null, stage:1, ladders:{}, log:{}, holds:[], bench:{}, weekOffset:0, mtime:0, gear:{band:false, bar:false}, wake:true };
 let S = load();
 let view = { t:"today" };
 let timer = { on:false, sec:0, id:null, ex:null };
@@ -49,12 +49,28 @@ function streak(){
   while((S.log[key(d)]||[]).length){ n++; d.setDate(d.getDate()-1); }
   return n;
 }
-const itemsOf = s => typeof s.items === "function" ? s.items(currentWeek()) : s.items;
-const doneToday = id => (S.log[today()]||[]).includes(id);
+function hasGear(g){ return !!(S.gear && S.gear[g]); }
+function swapGear(items){
+  return items.map(it => {
+    const ex = EX[it[0]];
+    if(ex && ex.gear && !hasGear(ex.gear) && EX[ex.alt]) return [ex.alt, EX[ex.alt].dose];
+    return it;
+  });
+}
+const itemsOf = s => swapGear(typeof s.items === "function" ? s.items(currentWeek()) : s.items);
+const viewDay = () => view.day || today();
+const isToday = () => viewDay() === today();
+const doneToday = id => (S.log[viewDay()]||[]).includes(id);
+const dayLabel = k => {
+  const off = daysBetween(k, today());
+  if(off===0) return "Today";
+  if(off===1) return "Yesterday";
+  return new Date(k+"T00:00:00").toLocaleDateString(undefined,{weekday:"long", month:"short", day:"numeric"});
+};
 function toggle(id){
-  const t = today(); const a = S.log[t] || (S.log[t]=[]);
+  const t = viewDay(); const a = S.log[t] || (S.log[t]=[]);
   const i = a.indexOf(id);
-  if(i<0){ a.push(id); toast("Logged · "+SESSIONS[id].name); } else { a.splice(i,1); }
+  if(i<0){ a.push(id); toast("Logged · "+SESSIONS[id].name+(isToday()?"":" · "+dayLabel(t))); } else { a.splice(i,1); }
   if(!a.length) delete S.log[t];
   save(); render();
 }
@@ -128,7 +144,21 @@ function scrToday(){
     <span class="phase">${esc(ph[2])}</span>
     <div class="sub">${esc(ph[3])}</div>
   </div>
-  <h3>Today</h3>
+  <h3>Last 7 days</h3>
+  <div class="daystrip">
+    ${Array.from({length:7},(_,i)=>{
+      const d = new Date(); d.setDate(d.getDate()-(6-i));
+      const k = key(d), n = (S.log[k]||[]).length, sel = k===viewDay();
+      return `<div class="day ${sel?"sel":""} ${n?"has":""}" data-day="${k}">
+        <div class="dw">${d.toLocaleDateString(undefined,{weekday:"narrow"})}</div>
+        <div class="dn">${d.getDate()}</div>
+        <div class="dd">${n?"•".repeat(Math.min(n,4)):"&nbsp;"}</div>
+      </div>`;}).join("")}
+  </div>
+  <p class="hint" style="margin-top:8px">Yesterday's ticks stay on yesterday — they still count. Tap any day to see or fix what you logged.</p>
+  ${isToday() ? "" : `<div class="viewing">Logging for <b>${esc(dayLabel(viewDay()))}</b>
+    <button class="act ghost" data-nav="backtoday" style="padding:6px 12px;min-height:34px;font-size:.8rem">Back to today</button></div>`}
+  <h3>${esc(dayLabel(viewDay()))}</h3>
   ${ids.map(id=>{
     const s = SESSIONS[id], on = doneToday(id);
     return `<div class="sess ${on?"on":""}">
@@ -146,16 +176,19 @@ function scrToday(){
 function scrSess(){
   const s = SESSIONS[view.id], its = itemsOf(s), i = view.i, item = its[i], ex = EX[item[0]];
   const last = i === its.length-1;
-  return `
+  const raw = (typeof s.items === "function" ? s.items(currentWeek()) : s.items)[i];
+  const sub = (raw && raw[0] !== item[0] && EX[raw[0]]) ? EX[raw[0]].name : null;
+  return `<div class="sessbody">
   <div class="step">${esc(s.name)} · ${i+1} of ${its.length}</div>
   <div class="prog"><i style="width:${(i+1)/its.length*100}%"></i></div>
   ${exBlock(ex, item[1])}
-  ${timerBlock(item[0])}
+  ${timerBar(ex, item[1], item[0])}
   <div class="btnrow">
     <button class="act ghost" data-nav="${i>0?"prev":"quit"}">${i>0?"← Back":"Quit"}</button>
     <button class="act ${last?"good":""}" data-nav="${last?"finish":"next"}">${last?"Finish session ✓":"Next →"}</button>
   </div>
-  <p class="hint" style="margin-top:14px;text-align:center">Skip anything that hurts. A shorter honest session still counts.</p>`;
+  ${sub ? `<p class="hint" style="margin-top:12px;text-align:center">Swapped in for <b>${esc(sub)}</b> because you don't have that kit. Turn it on under Plan → Equipment.</p>` : ""}
+  <p class="hint" style="margin-top:14px;text-align:center">Skip anything that hurts. A shorter honest session still counts.</p></div>`;
 }
 
 function exBlock(ex, dose){
@@ -172,16 +205,26 @@ function exBlock(ex, dose){
   </div>`;
 }
 
-function timerBlock(k){
+function timerBar(ex, dose, k){
   const b = bestHold(k);
-  return `<div class="panel timer">
-    <div class="tnum ${timer.on?"run":""}" id="tnum">${fmt(timer.ex===k?timer.sec:0)}</div>
-    <div class="tbest">${b?("Best logged: "+b+" sec"):"No hold logged yet"}</div>
-    <div class="btnrow">
-      <button class="act ${timer.on?"ghost":""}" data-timer="${timer.on?"stop":"start"}" data-ex="${k}">${timer.on?"Stop":"Start timer"}</button>
-      <button class="act ghost" data-timer="log" data-ex="${k}" ${timer.sec&&timer.ex===k?"":"disabled"}>Log hold</button>
+  return `<div class="tbar" id="tbar">
+    <div class="tinfo">
+      <div class="tname">${esc(ex.name)}</div>
+      <div class="tdose">${esc(dose||ex.dose)}${b?" · best "+b+"s":""}</div>
     </div>
+    <div class="tnum" id="tnum">${fmt(timer.ex===k?timer.sec:0)}</div>
+    <button class="tbtn" id="tbtn" data-timer="${timer.on?"stop":"start"}" data-ex="${k}">${timer.on?"Stop":"Start"}</button>
+    <button class="tbtn ghost" id="tlog" data-timer="log" data-ex="${k}" ${(timer.sec&&timer.ex===k)?"":"disabled"}>Log</button>
   </div>`;
+}
+/* update the bar in place — never re-render, that's what reset the scroll position */
+function paintTimer(k){
+  const n = document.getElementById("tnum");
+  if(n){ n.textContent = fmt(timer.ex===k?timer.sec:0); n.classList.toggle("run", timer.on); }
+  const btn = document.getElementById("tbtn");
+  if(btn){ btn.textContent = timer.on ? "Stop" : "Start"; btn.dataset.timer = timer.on ? "stop" : "start"; }
+  const lg = document.getElementById("tlog");
+  if(lg) lg.disabled = !(timer.sec && timer.ex===k);
 }
 const fmt = s => Math.floor(s/60)+":"+pad(s%60);
 
@@ -291,6 +334,25 @@ function scrPlan(){
   </div>
   ${typeof Sync !== "undefined" ? Sync.html() : ""}
   <div class="panel">
+    <h2>Equipment</h2>
+    <p class="hint">Sessions adapt automatically. Turn something on and the drills that use it come back.</p>
+    ${[["band","Resistance bands","Band rows, pulldowns, lateral walks, Pallof press"],
+       ["bar","Pull-up bar","Dead hangs, scapular pulls, negatives — the pull-up ladder"]]
+      .map(g=>`<div class="sess ${hasGear(g[0])?"on":""}" data-gear="${g[0]}" style="margin-bottom:8px">
+        <div class="txt"><div class="nm">${esc(g[1])}</div><div class="sb">${esc(g[2])}</div></div>
+        <div class="tick">${hasGear(g[0])?"✓":""}</div></div>`).join("")}
+    <p class="hint" style="margin-top:10px;margin-bottom:0">Without these, everything runs on dumbbells, a chair and the floor — nothing is skipped, it's substituted.</p>
+  </div>
+  <div class="panel">
+    <h2>During a session</h2>
+    <div class="sess ${S.wake?"on":""}" data-wake="1" style="margin-bottom:8px">
+      <div class="txt"><div class="nm">Keep the screen awake</div>
+      <div class="sb">${wakeSupported() ? "Stops your phone locking mid-hold" : "Not supported by this browser — try Safari, iOS 16.4+"}</div></div>
+      <div class="tick">${S.wake?"✓":""}</div>
+    </div>
+    <p class="hint" style="margin-bottom:0">Only active while you're inside a session, so it won't drain your battery the rest of the day.</p>
+  </div>
+  <div class="panel">
     <h2>Version</h2>
     <p class="hint">If the app looks out of date, check this against what you deployed.</p>
     <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line)">
@@ -322,6 +384,7 @@ function render(){
     : view.t==="plan" ? scrPlan() : scrToday();
   document.querySelectorAll("#nav button").forEach(b=>
     b.classList.toggle("on", b.dataset.t === (view.t==="sess"?"today":view.t)));
+  if(view.t==="sess") keepAwake(); else releaseAwake();
   window.scrollTo(0, view.t==="sess" ? 0 : window._sy||0);
   if(view.t==="plan") showCache();
 }
@@ -339,6 +402,17 @@ document.addEventListener("click", e=>{
     render(); return; }
 
   const tg = t.closest("[data-tog]"); if(tg){ toggle(tg.dataset.tog); return; }
+  const wkl = t.closest("[data-wake]");
+  if(wkl){ S.wake = !S.wake; save(); if(S.wake) keepAwake(); else releaseAwake();
+    toast(S.wake?"Screen will stay awake in sessions":"Screen may sleep normally"); render(); return; }
+
+  const dy = t.closest("[data-day]");
+  if(dy){ view.day = dy.dataset.day === today() ? null : dy.dataset.day; render(); return; }
+
+  const gr = t.closest("[data-gear]");
+  if(gr){ const g = gr.dataset.gear; S.gear = S.gear || {}; S.gear[g] = !S.gear[g]; save();
+    toast(S.gear[g] ? "Enabled — band/bar drills restored" : "Disabled — using dumbbell alternates"); render(); return; }
+
   const ld = t.closest("[data-lad]");
   if(ld){ const [id,n] = ld.dataset.lad.split(":"); S.ladders[id] = +n; save(); render(); return; }
 
@@ -348,13 +422,13 @@ document.addEventListener("click", e=>{
   const tm = t.closest("[data-timer]");
   if(tm){
     const a = tm.dataset.timer, k = tm.dataset.ex;
-    if(a==="start") startTimer(k);
+    if(a==="start"){ startTimer(k); keepAwake(); }
     else if(a==="stop") stopTimer();
     else if(a==="log"){
-      if(timer.sec>0){ S.holds.push({id:uid(), d:today(), ex:k, sec:timer.sec}); save();
+      if(timer.sec>0){ S.holds.push({id:uid(), d:viewDay(), ex:k, sec:timer.sec}); save();
         toast("Logged "+timer.sec+" sec"); timer.sec=0; stopTimer(); }
     }
-    render(); return;
+    paintTimer(k); return;      // no render() — keeps your scroll position
   }
 
   const au = t.closest("[data-auth]");
@@ -368,6 +442,7 @@ document.addEventListener("click", e=>{
     else if(a==="quit"){ view = {t:"today"}; }
     else if(a==="finish"){ if(!doneToday(view.id)) toggle(view.id); view={t:"today"}; }
     else if(a==="lib"){ view={t:"library"}; }
+    else if(a==="backtoday"){ view = {t:"today"}; }
     else if(a==="update"){ forceUpdate(); return; }
     else if(a==="export"){ exportData(); return; }
     else if(a==="wipe"){ if(confirm("Delete all logged progress on this device?")){ S=Object.assign({},DEF); save(); view={t:"today"}; } }
@@ -388,12 +463,28 @@ function startTimer(k){
   if(timer.ex !== k) timer.sec = 0;
   timer.ex = k; timer.on = true;
   clearInterval(timer.id);
-  timer.id = setInterval(()=>{ timer.sec++;
-    const n = document.getElementById("tnum"); if(n) n.textContent = fmt(timer.sec);
-    const lg = document.querySelector('[data-timer="log"]'); if(lg) lg.disabled = false;
-  }, 1000);
+  timer.id = setInterval(()=>{ timer.sec++; paintTimer(k); }, 1000);
+  paintTimer(k);
 }
-function stopTimer(){ timer.on=false; clearInterval(timer.id); timer.id=null; }
+function stopTimer(){ timer.on=false; clearInterval(timer.id); timer.id=null;
+  if(timer.ex) paintTimer(timer.ex); }
+
+/* ---------- keep the screen awake ---------- */
+let wakeLock = null;
+async function keepAwake(){
+  if(!S.wake || !("wakeLock" in navigator)) return;
+  try{
+    if(wakeLock) return;
+    wakeLock = await navigator.wakeLock.request("screen");
+    wakeLock.addEventListener("release", ()=>{ wakeLock = null; });
+  }catch(e){ wakeLock = null; }
+}
+function releaseAwake(){ if(wakeLock){ try{ wakeLock.release(); }catch(e){} wakeLock = null; } }
+document.addEventListener("visibilitychange", ()=>{
+  if(document.hidden) { wakeLock = null; }
+  else if(view.t === "sess") keepAwake();
+});
+const wakeSupported = () => ("wakeLock" in navigator);
 
 /* ---------- cache / update ---------- */
 async function showCache(){

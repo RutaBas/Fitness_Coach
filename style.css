@@ -67,7 +67,20 @@ button.act:disabled{opacity:.4}
 .btnrow{display:flex;gap:9px;margin-top:14px}
 .btnrow button{flex:1}
 
+.tbar{position:fixed;left:0;right:0;bottom:calc(66px + var(--safeB));z-index:45;
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  background:rgba(25,27,36,.97);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);max-width:720px;margin:0 auto}
+.tinfo{flex:1;min-width:0}
+.tname{font-weight:650;font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tdose{color:var(--accent);font-size:.79rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbtn{background:var(--accent);color:#0f1016;border:0;border-radius:9px;padding:9px 13px;font-weight:650;
+  font-size:.82rem;font-family:inherit;min-height:40px;cursor:pointer}
+.tbtn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.tbtn:disabled{opacity:.35}
+.sessbody{padding-bottom:62px}
 .timer{text-align:center;padding:14px 0 4px}
+.tbar .tnum{font-size:1.5rem;min-width:62px;text-align:right}
 .tnum{font-size:3.1rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.04em;line-height:1}
 .tnum.run{color:var(--good)}
 .tbest{color:var(--muted);font-size:.8rem;margin-top:5px}
@@ -108,3 +121,15 @@ input:focus{outline:none;border-color:var(--accent)}
 .toast.show{opacity:1}
 .chart{width:100%;height:auto;max-height:180px;display:block;margin-top:8px}
 .dim{color:var(--muted);font-size:.84rem}
+
+.daystrip{display:flex;gap:6px;margin:10px 0 0}
+.day{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:8px 2px 6px;
+  text-align:center;cursor:pointer;min-height:58px}
+.day .dw{color:var(--muted);font-size:.62rem;text-transform:uppercase;letter-spacing:.06em}
+.day .dn{font-size:.95rem;font-weight:650;font-variant-numeric:tabular-nums;line-height:1.25}
+.day .dd{color:var(--good);font-size:.7rem;line-height:.9;letter-spacing:1px;height:9px}
+.day.has{border-color:var(--good)}
+.day.sel{background:var(--accent);border-color:var(--accent)}
+.day.sel .dw,.day.sel .dn,.day.sel .dd{color:#0f1016}
+.viewing{display:flex;align-items:center;gap:10px;justify-content:space-between;background:rgba(124,156,255,.12);
+  border:1px solid var(--accent);border-radius:11px;padding:10px 12px;margin:12px 0 4px;font-size:.87rem}

@@ -684,6 +684,7 @@ singleBridge: {
 },
 
 bandWalk: {
+  gear: "band", alt: "sideLying",
   name: "Banded lateral walk",
   cat: "Glutes",
   dose: "3 × 12 steps/direction",
@@ -716,6 +717,7 @@ birdDog: {
 },
 
 pallof: {
+  gear: "band", alt: "suitcase",
   name: "Band Pallof press",
   cat: "Core",
   dose: "3 × 8/side, 3 sec hold",
@@ -770,6 +772,7 @@ pistol: {
 },
 
 bandRow: {
+  gear: "band", alt: "row",
   name: "Band row",
   cat: "Calisthenics",
   dose: "3 × 12",
@@ -786,6 +789,7 @@ bandRow: {
 },
 
 bandPulldown: {
+  gear: "band", alt: "pullover",
   name: "Band lat pulldown",
   cat: "Calisthenics",
   dose: "3 × 12",
@@ -803,6 +807,7 @@ bandPulldown: {
 },
 
 scapPull: {
+  gear: "band", alt: "ytw",
   name: "Scapular pull (band)",
   cat: "Calisthenics",
   dose: "3 × 10, 2 sec holds",
@@ -834,6 +839,74 @@ sideCrow: {
   mistake: "Not twisting enough, so there's no shelf for the leg to sit on.",
   vid: "side crow parsva bakasana tutorial",
   fig: { hd:[64,60], nk:[54,58], hp:[34,54], el:[54,72], hn:[52,88], el2:[46,72], hn2:[44,88], kn:[40,68], ft:[24,64], props:["floor"] }
+},
+
+/* ---------- NO-BAND ALTERNATES (dumbbells / bodyweight only) ---------- */
+pullover: {
+  name: "Dumbbell pullover",
+  cat: "Calisthenics",
+  dose: "3 × 12",
+  why: "Your overhead pulling pattern without a band or a bar — the same lat action as a pulldown. It doubles as shoulder-flexion mobility, which is exactly what a straight handstand needs, so it's arguably the better exercise for you anyway.",
+  how: ["Lie on your back on the floor, knees bent, both hands cupping one dumbbell over your chest.",
+        "Arms almost straight, elbows softly bent.",
+        "Lower the dumbbell back past your head until you feel a stretch under the armpits.",
+        "Pull it back over your chest. Keep the low back flat the whole time."],
+  cues: ["Ribs down — if your back arches to get more range, you've gone too far.",
+         "Go light. This is a stretch-and-control exercise, not a strength contest.",
+         "Slow: 3 seconds back, 2 seconds return."],
+  mistake: "Bending the elbows and turning it into a triceps extension.",
+  vid: "dumbbell pullover proper form",
+  fig: { hd:[34,64], nk:[42,66], hp:[66,70], el:[30,56], hn:[20,50], kn:[76,58], ft:[86,72], props:["floor80","bellDown"] }
+},
+
+sideLying: {
+  name: "Side-lying hip abduction",
+  cat: "Glutes",
+  dose: "3 × 15/side",
+  why: "The no-equipment way to hit the side glutes (glute medius) that the banded walk targets. These are your pelvis stabilisers — they matter for single-leg work and for not wobbling upside down.",
+  how: ["Lie on your side, bottom knee bent for stability, top leg straight and in line with your body.",
+        "Roll the top hip very slightly forward and turn the toes slightly down.",
+        "Lift the top leg to about 45°, pause, lower slowly. Don't let it rest between reps."],
+  cues: ["Toes pointing slightly DOWN, not up — that's what makes it the glute instead of the hip flexor.",
+         "Small range done right beats a big swinging range.",
+         "Rest a dumbbell on the thigh once 15 reps feels easy."],
+  mistake: "Rolling backwards so the leg drifts behind you. Stay stacked.",
+  vid: "side lying hip abduction glute medius",
+  fig: { hd:[20,72], nk:[30,74], hp:[60,78], el:[28,66], hn:[22,60], kn:[76,82], ft:[90,86], kn2:[74,62], ft2:[90,54], props:["floor"] }
+},
+
+suitcase: {
+  name: "Suitcase carry",
+  cat: "Core",
+  dose: "3 × 40 sec/side",
+  why: "Anti-rotation and anti-side-bend core without a band. One heavy dumbbell in one hand tries to tip you sideways and your whole trunk has to refuse — the same job the Pallof press does.",
+  how: ["One heavy dumbbell in one hand, arm straight down.",
+        "Stand tall: shoulders level, ribs down, glutes on.",
+        "Walk slowly for 40 seconds, or just stand still if space is tight.",
+        "Swap hands. The unloaded side is doing the work."],
+  cues: ["Do NOT lean away from the weight — stay perfectly stacked. That's the whole exercise.",
+         "Shoulders level. Check yourself in a mirror or a dark window.",
+         "Go heavy enough that your grip is challenged."],
+  mistake: "Leaning sideways to counterbalance. If you're tipping, go lighter.",
+  vid: "suitcase carry core exercise form",
+  fig: { hd:[48,26], nk:[48,34], hp:[48,58], el:[42,46], hn:[40,62], el2:[56,44], hn2:[58,54], kn:[44,76], ft:[42,94], kn2:[54,76], ft2:[58,94], props:["floor","bellSide"] }
+},
+
+ytw: {
+  name: "Prone Y-T-W raises",
+  cat: "Calisthenics",
+  dose: "3 × 6 of each letter",
+  why: "Builds the shoulder-blade control that a first pull-up needs, face-down on the floor with no equipment. Most failed pull-ups are a scapular problem, not an arm problem — this is that work.",
+  how: ["Lie face down, forehead resting on the floor or a towel.",
+        "Y — arms overhead in a narrow V, thumbs up. Lift both arms a few centimetres. 6 reps.",
+        "T — arms straight out to the sides, thumbs up. Lift. 6 reps.",
+        "W — elbows bent at your sides, squeeze the shoulder blades back and down. 6 reps."],
+  cues: ["Squeeze the shoulder blades DOWN and together — don't shrug toward your ears.",
+         "Height is irrelevant. A centimetre done correctly beats a big heave.",
+         "Add tiny dumbbells (1–2 kg) only once all three letters feel easy."],
+  mistake: "Lifting the head and arching the neck. Forehead stays down.",
+  vid: "prone Y T W raises shoulder exercise",
+  fig: { hd:[30,84], nk:[40,82], hp:[68,80], el:[32,72], hn:[22,66], el2:[36,90], hn2:[24,94], kn:[80,82], ft:[92,86], props:["floor"] }
 }
 };
 
