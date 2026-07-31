@@ -179,6 +179,7 @@ freestanding: {
 
 /* ---------- ARM BALANCE ---------- */
 crow: {
+  load: "2 × 10–15 lb.",
   name: "Crow (bakasana)",
   cat: "Skill",
   dose: "4 × as long as clean",
@@ -193,6 +194,7 @@ crow: {
 
 /* ---------- STRENGTH ---------- */
 ohp: {
+  load: "2 × 8 lb. Go up to 10 lb only when 4 × 8 is clean with ribs down.",
   name: "Overhead press (dumbbells)",
   cat: "Strength",
   dose: "4 × 8",
@@ -223,6 +225,7 @@ pikePushup: {
 
 row: {
   name: "Single-arm row",
+  vs: "Not the Romanian deadlift. Same hinge, different job: your elbow bends and the weight comes to your hip (back and biceps). In an RDL the arm never moves.",
   cat: "Strength",
   dose: "3 × 10/side",
   why: "Balances all the pressing. A healthy shoulder needs pulling volume to match, or the joint gets cranky three weeks in.",
@@ -235,6 +238,7 @@ row: {
 },
 
 splitSquat: {
+  load: "2 × 10 lb, or bodyweight until the balance is solid.",
   name: "Bulgarian split squat",
   cat: "Strength",
   dose: "3 × 10/side",
@@ -248,7 +252,9 @@ splitSquat: {
 },
 
 rdl: {
+  load: "2 × 15 lb — your heaviest pair. Should feel like a real hamstring stretch.",
   name: "Romanian deadlift",
+  vs: "Not a row. Your ARMS DO NOTHING here — they hang straight like ropes. The movement is your hips travelling backward and forward, and you should feel it in your hamstrings, not your back or biceps.",
   cat: "Strength",
   dose: "3 × 10",
   why: "Hamstring strength through range IS hamstring flexibility. Passive stretching alone is why the flexibility you had didn't stick.",
@@ -275,6 +281,7 @@ sidePlank: {
 },
 
 carry: {
+  load: "The 25 lb single, one hand at a time. Perfect use for an odd weight.",
   name: "Loaded carry",
   cat: "Strength",
   dose: "3 × 40 sec",
@@ -289,6 +296,7 @@ carry: {
 
 /* ---------- FLEXIBILITY ---------- */
 jefferson: {
+  load: "One 8 lb. Start lighter than feels sensible — this one punishes ego.",
   name: "Jefferson curl",
   cat: "Flexibility",
   dose: "3 × 8, light",
@@ -390,17 +398,20 @@ deadHang: {
 },
 
 dislocates: {
-  name: "Band dislocates",
+  name: "Towel shoulder dislocates",
   cat: "Flexibility",
   dose: "3 × 10",
-  why: "Actively takes the shoulders through full overhead range — the cheapest, fastest shoulder-mobility win in the program.",
-  how: ["Hold a band wide, arms straight.",
-        "Sweep it overhead and behind you, keeping the elbows locked.",
-        "Return the same way. Narrow the grip as you get more mobile."],
+  load: "A bath towel, a broomstick, or a belt. No band needed.",
+  why: "Actively takes the shoulders through their full overhead range — the cheapest, fastest shoulder-mobility win in the program, and a direct requirement for a straight handstand.",
+  how: ["Hold a rolled bath towel or a broomstick with a WIDE grip, arms straight in front of you.",
+        "Keeping the elbows locked, sweep it up and over your head, and behind you as far as is comfortable.",
+        "Return the same way. Narrow your grip a little as you get more mobile.",
+        "A towel is more forgiving than a stick because you can let it stretch slightly."],
   cues: ["Arms stay straight the whole time — bending is how people fake range.",
-         "Go wide enough that it never pinches.", "Ribs down: don't arch to get the band over."],
-  mistake: "Grip too narrow too soon.",
-  vid: "shoulder dislocates band mobility",
+         "Start much wider than you think. If it pinches, go wider.",
+         "Ribs down: don't arch your back to get it over."],
+  mistake: "Grip too narrow too soon, which grinds the shoulder instead of opening it.",
+  vid: "shoulder dislocates towel mobility",
   fig: { hd:[48,32], nk:[48,40], hp:[48,62], el:[32,26], hn:[22,22], el2:[64,26], hn2:[74,22], kn:[48,80], ft:[48,94], props:["floor","bandArc"] }
 },
 
@@ -635,6 +646,7 @@ stepDown: {
 
 /* ---------- GLUTES ---------- */
 gluteBridge: {
+  load: "Bodyweight, or the 25 lb across the hips.",
   name: "Glute bridge",
   cat: "Glutes",
   dose: "3 × 12",
@@ -651,6 +663,7 @@ gluteBridge: {
 },
 
 hipThrust: {
+  load: "The 25 lb single across the hips (towel underneath). Progress to 2 × 15 lb held side by side.",
   name: "Couch hip thrust",
   cat: "Glutes",
   dose: "3 × 10",
@@ -668,6 +681,7 @@ hipThrust: {
 },
 
 singleBridge: {
+  load: "Bodyweight first. Add the 15 lb across the hips once 8 reps a side is easy.",
   name: "Single-leg glute bridge",
   cat: "Glutes",
   dose: "3 × 8/side",
@@ -754,6 +768,7 @@ lsit: {
 },
 
 pistol: {
+  load: "Hold the 8 lb out in front as a counterweight from level 3 onward.",
   name: "Pistol squat progression",
   cat: "Calisthenics",
   dose: "3 × 5–8/side",
@@ -772,7 +787,7 @@ pistol: {
 },
 
 bandRow: {
-  gear: "band", alt: "row",
+  gear: "band", alt: "dbRow",
   name: "Band row",
   cat: "Calisthenics",
   dose: "3 × 12",
@@ -843,6 +858,7 @@ sideCrow: {
 
 /* ---------- NO-BAND ALTERNATES (dumbbells / bodyweight only) ---------- */
 pullover: {
+  load: "One 8 lb held in both hands. This one should never feel heavy.",
   name: "Dumbbell pullover",
   cat: "Calisthenics",
   dose: "3 × 12",
@@ -860,6 +876,7 @@ pullover: {
 },
 
 sideLying: {
+  load: "Bodyweight. Rest the 8 lb on the thigh once 15 reps feel easy.",
   name: "Side-lying hip abduction",
   cat: "Glutes",
   dose: "3 × 15/side",
@@ -876,6 +893,7 @@ sideLying: {
 },
 
 suitcase: {
+  load: "The 25 lb single. Heavy is the point — your side core has to refuse to bend.",
   name: "Suitcase carry",
   cat: "Core",
   dose: "3 × 40 sec/side",
@@ -893,6 +911,7 @@ suitcase: {
 },
 
 ytw: {
+  load: "No weight at first. The 8 lb pair only once all three letters feel easy.",
   name: "Prone Y-T-W raises",
   cat: "Calisthenics",
   dose: "3 × 6 of each letter",
@@ -907,6 +926,25 @@ ytw: {
   mistake: "Lifting the head and arching the neck. Forehead stays down.",
   vid: "prone Y T W raises shoulder exercise",
   fig: { hd:[30,84], nk:[40,82], hp:[68,80], el:[32,72], hn:[22,66], el2:[36,90], hn2:[24,94], kn:[80,82], ft:[92,86], props:["floor"] }
+},
+
+dbRow: {
+  load: "2 × 10 lb to start, 2 × 15 lb once 12 reps feel easy.",
+  name: "Two-dumbbell bent-over row",
+  cat: "Calisthenics",
+  dose: "3 × 12",
+  vs: "Not the Romanian deadlift. Same bent-over position, opposite job: here your ELBOWS BEND and the weights travel to your ribs (back and biceps). In an RDL the arms never move at all — the hips do.",
+  why: "Both arms at once, so it takes half the time of the single-arm version and trains the same muscles. Pulling volume matters here: all the pressing in this program needs balancing or the shoulders get cranky.",
+  how: ["Feet hip-width, a dumbbell in each hand.",
+        "Hinge forward to about 45°, back flat, knees softly bent. Hold that position — it doesn't change.",
+        "Row both dumbbells to your ribs, elbows close to the body.",
+        "Squeeze the shoulder blades together for a beat, lower slowly."],
+  cues: ["Your torso is a statue. If it rises and falls with each rep, you're using momentum.",
+         "Lead with the elbows, not the hands — think elbow to back pocket.",
+         "3 seconds on the way down. That's where the muscle is built, especially with lighter weights."],
+  mistake: "Standing up a little on each rep. Set the hinge, then move only your arms.",
+  vid: "two dumbbell bent over row form",
+  fig: { hd:[24,48], nk:[32,50], hp:[64,50], el:[38,60], hn:[40,50], el2:[34,64], hn2:[36,54], kn:[68,72], ft:[70,92], props:["floor","bellDown"] }
 }
 };
 
@@ -941,10 +979,10 @@ const SESSIONS = {
 
   B: { id:"B", name:"Day B — Strength", sub:"45 min · push, pull, legs — calisthenics-flavoured", mins:45, color:"#f0b45e",
     items: w => (w<=4
-      ? [["wristPrep","2 min"],["inclinePush","3 × 8–10"],["bandRow","3 × 12"],["ohp","3 × 8, light"],
-         ["bandPulldown","3 × 12"],["pistol","3 × 5/side, high surface"],["rdl","3 × 10"],
+      ? [["wristPrep","2 min"],["inclinePush","3 × 8–10"],["dbRow","3 × 12"],["rdl","3 × 10"],["ohp","3 × 8, light"],
+         ["bandPulldown","3 × 12"],["pistol","3 × 5/side, high surface"],
          ["deadBug","3 × 8/side"],["carry","3 × 30 sec"]]
-      : [["wristPrep","2 min"],["inclinePush","3 × 10"],["bandRow","3 × 12"],["ohp","4 × 8"],
+      : [["wristPrep","2 min"],["inclinePush","3 × 10"],["dbRow","3 × 12"],["ohp","4 × 8"],
          ["boxPikePush","3 × 6"],["scapPull","3 × 10"],["bandPulldown","3 × 12"],
          ["pistol","3 × 6–8/side"],["rdl","3 × 10"],["carry","3 × 40 sec"]]) },
 

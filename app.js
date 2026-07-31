@@ -1,6 +1,6 @@
 /* app.js — The Handstand Project */
 
-const APP_VERSION = "v8";
+const APP_VERSION = "v10";
 const KEY = "handstand.state";
 const WEEKS = 16;
 const DEF = { start:null, stage:1, ladders:{}, log:{}, holds:[], bench:{}, weekOffset:0, mtime:0, gear:{band:false, bar:false}, wake:true };
@@ -195,9 +195,11 @@ function exBlock(ex, dose){
   return `<div class="panel">
     <div class="exhead">
       ${figure(ex.fig)}
-      <div><h2>${esc(ex.name)}</h2><div class="sub">${esc(dose||ex.dose)}</div></div>
+      <div><h2>${esc(ex.name)}</h2><div class="sub">${esc(dose||ex.dose)}</div>
+      ${ex.load ? `<div class="loadchip">${esc(ex.load)}</div>` : ""}</div>
     </div>
     <p class="why">${esc(ex.why)}</p>
+    ${ex.vs ? `<p class="vs"><b>Easy to confuse:</b> ${esc(ex.vs)}</p>` : ""}
     <h3>How</h3><ol class="how">${ex.how.map(h=>`<li>${esc(h)}</li>`).join("")}</ol>
     <h3>Cues</h3><ul class="cues">${ex.cues.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
     <p class="mist"><b>Common mistake:</b> ${esc(ex.mistake)}</p>
@@ -211,6 +213,7 @@ function timerBar(ex, dose, k){
     <div class="tinfo">
       <div class="tname">${esc(ex.name)}</div>
       <div class="tdose">${esc(dose||ex.dose)}${b?" · best "+b+"s":""}</div>
+      ${ex.load ? `<div class="tload">${esc(ex.load.split("—")[0].split(".")[0].trim())}</div>` : ""}
     </div>
     <div class="tnum" id="tnum">${fmt(timer.ex===k?timer.sec:0)}</div>
     <button class="tbtn" id="tbtn" data-timer="${timer.on?"stop":"start"}" data-ex="${k}">${timer.on?"Stop":"Start"}</button>
@@ -342,6 +345,17 @@ function scrPlan(){
         <div class="txt"><div class="nm">${esc(g[1])}</div><div class="sb">${esc(g[2])}</div></div>
         <div class="tick">${hasGear(g[0])?"✓":""}</div></div>`).join("")}
     <p class="hint" style="margin-top:10px;margin-bottom:0">Without these, everything runs on dumbbells, a chair and the floor — nothing is skipped, it's substituted.</p>
+  </div>
+  <div class="panel">
+    <h2>Your weights</h2>
+    <p class="hint">Pairs 8 · 10 · 15 lb — Singles 20 · 25 lb</p>
+    <div style="padding:8px 0;border-bottom:1px solid var(--line)"><b style="font-size:.88rem">Heaviest pair (15 lb)</b>
+      <div class="dim">Romanian deadlift, bent-over row once 12 reps are easy</div></div>
+    <div style="padding:8px 0;border-bottom:1px solid var(--line)"><b style="font-size:.88rem">Singles (20 / 25 lb)</b>
+      <div class="dim">Loaded and suitcase carries, hip thrust across the hips</div></div>
+    <div style="padding:8px 0;border-bottom:1px solid var(--line)"><b style="font-size:.88rem">Lightest pair (8 lb)</b>
+      <div class="dim">Overhead press, pullover, Jefferson curl, pistol counterweight</div></div>
+    <p class="hint" style="margin:11px 0 0">Rule for anything not listed: the last 2 reps should be hard but your form shouldn't break. Fewer reps beats heavier-and-sloppy — that's how you progress when the weight can't change.</p>
   </div>
   <div class="panel">
     <h2>During a session</h2>
