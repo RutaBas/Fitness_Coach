@@ -1,15 +1,21 @@
 /* app.js — The Handstand Project */
 
-const APP_VERSION = "v10";
+const APP_VERSION = "v13";
 const KEY = "handstand.state";
 const WEEKS = 16;
-const DEF = { start:null, stage:1, ladders:{}, log:{}, holds:[], bench:{}, weekOffset:0, mtime:0, gear:{band:false, bar:false}, wake:true };
+const DEF = { start:null, stage:1, ladders:{}, log:{}, holds:[], bench:{}, weekOffset:0, mtime:0, gear:{band:false, bar:false, wheel:true}, rest:75, wake:true };
 let S = load();
 let view = { t:"today" };
 let timer = { on:false, sec:0, id:null, ex:null };
 
 function load(){
-  try{ const r = JSON.parse(localStorage.getItem(KEY)); if(r && typeof r==="object") return Object.assign({},DEF,r); }
+  try{ const r = JSON.parse(localStorage.getItem(KEY));
+    if(r && typeof r==="object"){
+      const s = Object.assign({},DEF,r);
+      s.gear = Object.assign({}, DEF.gear, r.gear||{});   // new kit types default sensibly
+      if(!s.rest) s.rest = DEF.rest;
+      return s;
+    } }
   catch(e){}
   return Object.assign({},DEF);
 }
@@ -48,6 +54,29 @@ function streak(){
   if(!(S.log[key(d)]||[]).length) d.setDate(d.getDate()-1);   // today not done yet: allow yesterday
   while((S.log[key(d)]||[]).length){ n++; d.setDate(d.getDate()-1); }
   return n;
+}
+/* Time estimate. Counts SETS and per-side doubling, not exercises — the mistake
+   that made Day E "22 min" when it was really 43. Rest interval comes from your setting. */
+function estSecs(dose, exKey){
+  if(!dose) return 0;
+  const d = String(dose);
+  const mm = d.match(/(\d+)\s*(?:–|-)\s*(\d+)\s*min|(\d+)\s*min/);
+  if(mm) return parseInt(mm[2]||mm[3],10)*60;
+  const sets  = parseInt((d.match(/(\d+)\s*×/)||[])[1]||1,10);
+  const sides = /\/\s*side|direction/.test(d) ? 2 : 1;
+  const secm  = d.match(/×\s*(\d+)(?:–\d+)?\s*sec/);
+  const work  = secm ? parseInt(secm[1],10)
+              : parseInt((d.match(/×\s*(\d+)/)||[])[1]||8,10) * 3;
+  const ex = exKey && EX[exKey];
+  const rest = (ex && typeof ex.rest === "number") ? ex.rest : (S.rest||75);
+  return sets*sides*(work + rest);
+}
+function sessionMins(s){
+  return Math.round(itemsOf(s).reduce((a,it)=>a+estSecs(it[1]||EX[it[0]].dose, it[0]),0)/60);
+}
+function remainingMins(s,i){
+  const its = itemsOf(s);
+  return Math.round(its.slice(i).reduce((a,it)=>a+estSecs(it[1]||EX[it[0]].dose, it[0]),0)/60);
 }
 function hasGear(g){ return !!(S.gear && S.gear[g]); }
 function swapGear(items){
@@ -90,6 +119,8 @@ function figure(f, cls){
   if(has("wallRfar"))p += `<path d="M80 6 L80 94" ${gl}/>`;
   if(has("bar"))     p += `<path d="M14 12 L86 12" ${gl}/>`;
   if(has("roller"))  p += `<circle cx="46" cy="73" r="7" fill="none" ${gl}/>`;
+  if(has("wheel"))   p += `<circle cx="46" cy="70" r="13" fill="none" stroke="#7ad4c8" stroke-width="2.6"/>`;
+  if(has("wheelL"))  p += `<circle cx="20" cy="80" r="13" fill="none" stroke="#7ad4c8" stroke-width="2.6"/>`;
   if(has("boxR"))    p += `<rect x="62" y="70" width="26" height="24" rx="3" fill="none" ${gl}/>`;
   if(has("boxL"))    p += `<rect x="12" y="62" width="26" height="32" rx="3" fill="none" ${gl}/>`;
   const bnd = 'stroke="#7c9cff" stroke-width="2.4" fill="none" stroke-linecap="round"';
@@ -163,7 +194,7 @@ function scrToday(){
     const s = SESSIONS[id], on = doneToday(id);
     return `<div class="sess ${on?"on":""}">
       <div class="dot" style="background:${s.color}"></div>
-      <div class="txt" data-go="sess:${id}"><div class="nm">${esc(s.name)}</div><div class="sb">${esc(s.sub)}</div></div>
+      <div class="txt" data-go="sess:${id}"><div class="nm">${esc(s.name)} <span class="mins">~${sessionMins(s)} min</span></div><div class="sb">${esc(s.sub)}</div></div>
       <div class="tick" data-tog="${id}">${on?"✓":""}</div>
     </div>`;}).join("")}
   <p class="hint" style="margin-top:12px">Tap the name to be walked through it. Tap the box to log it.</p>
@@ -179,8 +210,9 @@ function scrSess(){
   const raw = (typeof s.items === "function" ? s.items(currentWeek()) : s.items)[i];
   const sub = (raw && raw[0] !== item[0] && EX[raw[0]]) ? EX[raw[0]].name : null;
   return `<div class="sessbody">
-  <div class="step">${esc(s.name)} · ${i+1} of ${its.length}</div>
+  <div class="step">${esc(s.name)} · ${i+1} of ${its.length} · ~${remainingMins(s,i)} min left</div>
   <div class="prog"><i style="width:${(i+1)/its.length*100}%"></i></div>
+  ${i===0 ? restBrief(s) : ""}
   ${exBlock(ex, item[1])}
   ${timerBar(ex, item[1], item[0])}
   <div class="btnrow">
@@ -191,12 +223,28 @@ function scrSess(){
   <p class="hint" style="margin-top:14px;text-align:center">Skip anything that hurts. A shorter honest session still counts.</p></div>`;
 }
 
+function restBrief(s){
+  const rs = itemsOf(s).map(it => EX[it[0]].rest).filter(r => typeof r === "number" && r > 0);
+  if(!rs.length) return "";
+  const lo = Math.min(...rs), hi = Math.max(...rs);
+  const fmtR = r => r >= 60 ? (r/60 % 1 ? (r/60).toFixed(1) : r/60) + " min" : r + " sec";
+  const body = lo === hi
+    ? `<b>${fmtR(lo)} between every set.</b>`
+    : `<b>${fmtR(lo)}–${fmtR(hi)} depending on the drill</b> — each one tells you, and it's shown on the timer bar.`;
+  const why = hi >= 90
+    ? "The heavy lifts need the long end: you're resting to recover strength, not to catch your breath. Short-changing it makes the next set worse, not tougher."
+    : "Core and mobility work recovers fast — long rests here just stretch the session out.";
+  return `<div class="panel restbrief"><h2>Rest between sets</h2>
+    <p style="margin:0 0 6px;font-size:.92rem">${body}</p>
+    <p class="dim" style="margin:0">${why} These are guides — if you need more, take it.</p></div>`;
+}
 function exBlock(ex, dose){
   return `<div class="panel">
     <div class="exhead">
       ${figure(ex.fig)}
       <div><h2>${esc(ex.name)}</h2><div class="sub">${esc(dose||ex.dose)}</div>
-      ${ex.load ? `<div class="loadchip">${esc(ex.load)}</div>` : ""}</div>
+      ${ex.load ? `<div class="loadchip">${esc(ex.load)}</div>` : ""}
+      ${ex.rest ? `<div class="restchip">rest ${ex.rest>=60?(ex.rest/60%1?(ex.rest/60).toFixed(1):ex.rest/60)+" min":ex.rest+" sec"}</div>` : ""}</div>
     </div>
     <p class="why">${esc(ex.why)}</p>
     ${ex.vs ? `<p class="vs"><b>Easy to confuse:</b> ${esc(ex.vs)}</p>` : ""}
@@ -214,6 +262,7 @@ function timerBar(ex, dose, k){
       <div class="tname">${esc(ex.name)}</div>
       <div class="tdose">${esc(dose||ex.dose)}${b?" · best "+b+"s":""}</div>
       ${ex.load ? `<div class="tload">${esc(ex.load.split("—")[0].split(".")[0].trim())}</div>` : ""}
+      ${ex.rest ? `<div class="trest">rest ${ex.rest}s</div>` : ""}
     </div>
     <div class="tnum" id="tnum">${fmt(timer.ex===k?timer.sec:0)}</div>
     <button class="tbtn" id="tbtn" data-timer="${timer.on?"stop":"start"}" data-ex="${k}">${timer.on?"Stop":"Start"}</button>
@@ -325,9 +374,10 @@ function scrPlan(){
     <div class="sub">${esc(p[3])}</div></div>`).join("")}
   <div class="panel">
     <h2>The weekly template</h2>
-    <p class="hint">3–4 of the 45-min days, plus Day E and the Daily 10. Day E is short on purpose — protect it.</p>
+    <p class="hint">Times are calculated from the actual sets, counting each side separately, using your rest setting (${S.rest||75}s).</p>
     ${["A","B","C","D","E"].map(id=>`<div style="padding:9px 0;border-bottom:1px solid var(--line)">
       <b style="font-size:.9rem;color:${SESSIONS[id].color}">${esc(SESSIONS[id].name)}</b>
+      <span class="mins" style="float:right">~${sessionMins(SESSIONS[id])} min</span>
       <div class="dim">${esc(SESSIONS[id].sub)}</div></div>`).join("")}
     <p class="hint" style="margin-top:12px">Put A and B on your best-energy days. C is the day for when your brain is fried — no decisions required.</p>
   </div>
@@ -340,7 +390,8 @@ function scrPlan(){
     <h2>Equipment</h2>
     <p class="hint">Sessions adapt automatically. Turn something on and the drills that use it come back.</p>
     ${[["band","Resistance bands","Band rows, pulldowns, lateral walks, Pallof press"],
-       ["bar","Pull-up bar","Dead hangs, scapular pulls, negatives — the pull-up ladder"]]
+       ["bar","Pull-up bar","Dead hangs, scapular pulls, negatives — the pull-up ladder"],
+       ["wheel","Yoga wheel (12\")","Upgrades the thoracic, puppy and bridge drills on Day D"]]
       .map(g=>`<div class="sess ${hasGear(g[0])?"on":""}" data-gear="${g[0]}" style="margin-bottom:8px">
         <div class="txt"><div class="nm">${esc(g[1])}</div><div class="sb">${esc(g[2])}</div></div>
         <div class="tick">${hasGear(g[0])?"✓":""}</div></div>`).join("")}
@@ -356,6 +407,14 @@ function scrPlan(){
     <div style="padding:8px 0;border-bottom:1px solid var(--line)"><b style="font-size:.88rem">Lightest pair (8 lb)</b>
       <div class="dim">Overhead press, pullover, Jefferson curl, pistol counterweight</div></div>
     <p class="hint" style="margin:11px 0 0">Rule for anything not listed: the last 2 reps should be hard but your form shouldn't break. Fewer reps beats heavier-and-sloppy — that's how you progress when the weight can't change.</p>
+  </div>
+  <div class="panel">
+    <h2>Rest between sets</h2>
+    <p class="hint">Fallback for drills without their own recommendation. Each exercise now carries its own rest guidance.</p>
+    <div class="restrow">
+      ${[45,60,75,90,120].map(r=>`<div class="wk ${S.rest===r?"active":""}" data-rest="${r}">${r>=60?(r/60)+(r%60?".5":"")+"m":r+"s"}</div>`).join("")}
+    </div>
+    <p class="hint" style="margin:10px 0 0">Longer rest is fine, and often better for strength work — it just makes sessions longer, which you should be able to see in advance.</p>
   </div>
   <div class="panel">
     <h2>During a session</h2>
@@ -416,6 +475,9 @@ document.addEventListener("click", e=>{
     render(); return; }
 
   const tg = t.closest("[data-tog]"); if(tg){ toggle(tg.dataset.tog); return; }
+  const rs = t.closest("[data-rest]");
+  if(rs){ S.rest = +rs.dataset.rest; save(); render(); return; }
+
   const wkl = t.closest("[data-wake]");
   if(wkl){ S.wake = !S.wake; save(); if(S.wake) keepAwake(); else releaseAwake();
     toast(S.wake?"Screen will stay awake in sessions":"Screen may sleep normally"); render(); return; }

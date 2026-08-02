@@ -1,4 +1,4 @@
-const CACHE_NAME = "handstand-v10"; // bump on every deploy
+const CACHE_NAME = "handstand-v13"; // bump on every deploy
 const ASSETS = [
   ".", "index.html", "style.css", "app.js", "exercises.js", "sync.js", "config.js",
   "vendor/supabase.js",

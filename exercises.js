@@ -7,6 +7,7 @@ const EX = {
 
 /* ---------- PREP ---------- */
 wristPrep: {
+  rest: 0,
   name: "Wrist prep",
   cat: "Prep",
   dose: "2 min · 15–20 sec each",
@@ -27,6 +28,7 @@ wristPrep: {
 
 /* ---------- HANDSTAND LINE ---------- */
 hollow: {
+  rest: 45,
   name: "Hollow body hold",
   cat: "Line",
   dose: "3–4 × 20–30 sec",
@@ -45,6 +47,7 @@ hollow: {
 },
 
 wallPlank: {
+  rest: 60,
   name: "Wall plank (feet on wall)",
   cat: "Line",
   dose: "3 × 30 sec",
@@ -61,6 +64,7 @@ wallPlank: {
 },
 
 chestWall: {
+  rest: 60,
   name: "Chest-to-wall handstand",
   cat: "Line",
   dose: "3–4 × 30–60 sec",
@@ -79,6 +83,7 @@ chestWall: {
 
 /* ---------- HANDSTAND BALANCE ---------- */
 weightShift: {
+  rest: 90,
   name: "Wall weight-shift",
   cat: "Balance",
   dose: "5 × 3 sec per hand",
@@ -95,6 +100,7 @@ weightShift: {
 },
 
 heelPull: {
+  rest: 90,
   name: "Heel pulls",
   cat: "Balance",
   dose: "8–10 attempts",
@@ -114,6 +120,7 @@ heelPull: {
 },
 
 kickUp: {
+  rest: 90,
   name: "Freestanding kick-up",
   cat: "Balance",
   dose: "10–15 attempts",
@@ -132,6 +139,7 @@ kickUp: {
 },
 
 bail: {
+  rest: 90,
   name: "Bail practice (cartwheel out)",
   cat: "Balance",
   dose: "5 reps every skill session",
@@ -149,6 +157,7 @@ bail: {
 },
 
 wallWalk: {
+  rest: 90,
   name: "Wall walk",
   cat: "Balance",
   dose: "3 × 4–6 reps",
@@ -165,6 +174,7 @@ wallWalk: {
 },
 
 freestanding: {
+  rest: 90,
   name: "Freestanding handstand",
   cat: "Balance",
   dose: "The goal — 10 sec",
@@ -179,6 +189,7 @@ freestanding: {
 
 /* ---------- ARM BALANCE ---------- */
 crow: {
+  rest: 60,
   load: "2 × 10–15 lb.",
   name: "Crow (bakasana)",
   cat: "Skill",
@@ -194,6 +205,7 @@ crow: {
 
 /* ---------- STRENGTH ---------- */
 ohp: {
+  rest: 90,
   load: "2 × 8 lb. Go up to 10 lb only when 4 × 8 is clean with ribs down.",
   name: "Overhead press (dumbbells)",
   cat: "Strength",
@@ -210,6 +222,7 @@ ohp: {
 },
 
 pikePushup: {
+  rest: 75,
   name: "Pike push-up",
   cat: "Strength",
   dose: "3 × 6",
@@ -224,6 +237,7 @@ pikePushup: {
 },
 
 row: {
+  rest: 75,
   name: "Single-arm row",
   vs: "Not the Romanian deadlift. Same hinge, different job: your elbow bends and the weight comes to your hip (back and biceps). In an RDL the arm never moves.",
   cat: "Strength",
@@ -238,6 +252,7 @@ row: {
 },
 
 splitSquat: {
+  rest: 90,
   load: "2 × 10 lb, or bodyweight until the balance is solid.",
   name: "Bulgarian split squat",
   cat: "Strength",
@@ -252,6 +267,7 @@ splitSquat: {
 },
 
 rdl: {
+  rest: 90,
   load: "2 × 15 lb — your heaviest pair. Should feel like a real hamstring stretch.",
   name: "Romanian deadlift",
   vs: "Not a row. Your ARMS DO NOTHING here — they hang straight like ropes. The movement is your hips travelling backward and forward, and you should feel it in your hamstrings, not your back or biceps.",
@@ -268,6 +284,7 @@ rdl: {
 },
 
 sidePlank: {
+  rest: 30,
   name: "Side plank",
   cat: "Strength",
   dose: "3 × 30 sec/side",
@@ -281,6 +298,7 @@ sidePlank: {
 },
 
 carry: {
+  rest: 60,
   load: "The 25 lb single, one hand at a time. Perfect use for an odd weight.",
   name: "Loaded carry",
   cat: "Strength",
@@ -296,6 +314,7 @@ carry: {
 
 /* ---------- FLEXIBILITY ---------- */
 jefferson: {
+  rest: 45,
   load: "One 8 lb. Start lighter than feels sensible — this one punishes ego.",
   name: "Jefferson curl",
   cat: "Flexibility",
@@ -313,6 +332,7 @@ jefferson: {
 },
 
 pigeon: {
+  rest: 0,
   name: "Elevated pigeon",
   cat: "Flexibility",
   dose: "90 sec/side",
@@ -327,6 +347,7 @@ pigeon: {
 },
 
 couch: {
+  rest: 0,
   name: "Couch stretch",
   cat: "Flexibility",
   dose: "90 sec/side + 10 glute bridges",
@@ -342,6 +363,7 @@ couch: {
 },
 
 puppy: {
+  rest: 0,
   name: "Puppy pose",
   cat: "Flexibility",
   dose: "90 sec",
@@ -357,6 +379,7 @@ puppy: {
 },
 
 thoracic: {
+  rest: 0,
   name: "Thoracic extension over a roll",
   cat: "Flexibility",
   dose: "2 min",
@@ -372,6 +395,7 @@ thoracic: {
 },
 
 thread: {
+  rest: 0,
   name: "Thread the needle",
   cat: "Flexibility",
   dose: "60 sec/side",
@@ -385,6 +409,7 @@ thread: {
 },
 
 deadHang: {
+  rest: 45,
   name: "Dead hang",
   cat: "Flexibility",
   dose: "3 × 20–30 sec",
@@ -398,6 +423,7 @@ deadHang: {
 },
 
 dislocates: {
+  rest: 30,
   name: "Towel shoulder dislocates",
   cat: "Flexibility",
   dose: "3 × 10",
@@ -416,6 +442,7 @@ dislocates: {
 },
 
 ankle: {
+  rest: 0,
   name: "Knee-to-wall ankle",
   cat: "Flexibility",
   dose: "2 × 60 sec/side",
@@ -430,6 +457,7 @@ ankle: {
 },
 
 bridge: {
+  rest: 0,
   name: "Bridge / wheel",
   cat: "Flexibility",
   dose: "3 × 20–30 sec",
@@ -445,6 +473,7 @@ bridge: {
 },
 
 cardio: {
+  rest: 0,
   name: "Zone 2 cardio",
   cat: "Cardio",
   dose: "30–40 min",
@@ -461,6 +490,7 @@ cardio: {
 
 /* ---------- RELOAD BLOCK (added after week-1 feedback: 3 months detrained) ---------- */
 deadBug: {
+  rest: 30,
   name: "Dead bug",
   cat: "Reload",
   dose: "3 × 8/side",
@@ -480,6 +510,7 @@ deadBug: {
 },
 
 plankHold: {
+  rest: 45,
   name: "Forearm plank",
   cat: "Reload",
   dose: "4 × 15–20 sec",
@@ -498,6 +529,7 @@ plankHold: {
 },
 
 shoulderTaps: {
+  rest: 45,
   name: "Plank shoulder taps",
   cat: "Reload",
   dose: "3 × 8/side",
@@ -516,6 +548,7 @@ shoulderTaps: {
 },
 
 inclinePush: {
+  rest: 60,
   name: "Incline push-up",
   cat: "Reload",
   dose: "3 × 8–10",
@@ -535,6 +568,7 @@ inclinePush: {
 },
 
 bearHold: {
+  rest: 45,
   name: "Bear hold",
   cat: "Reload",
   dose: "3 × 20 sec",
@@ -553,6 +587,7 @@ bearHold: {
 },
 
 dogHold: {
+  rest: 45,
   name: "Downward dog hold",
   cat: "Reload",
   dose: "3 × 30 sec",
@@ -571,6 +606,7 @@ dogHold: {
 },
 
 boxPike: {
+  rest: 60,
   name: "Box pike hold",
   cat: "Reload",
   dose: "3 × 20–30 sec",
@@ -590,6 +626,7 @@ boxPike: {
 },
 
 boxPikePush: {
+  rest: 75,
   name: "Box pike push-up",
   cat: "Reload",
   dose: "3 × 5–8",
@@ -607,6 +644,7 @@ boxPikePush: {
 },
 
 partialWall: {
+  rest: 75,
   name: "Partial wall walk",
   cat: "Reload",
   dose: "3 × 3–4 reps",
@@ -626,6 +664,7 @@ partialWall: {
 },
 
 stepDown: {
+  rest: 0,
   name: "Walk-down exit",
   cat: "Reload",
   dose: "Learn it once, use it always",
@@ -646,6 +685,7 @@ stepDown: {
 
 /* ---------- GLUTES ---------- */
 gluteBridge: {
+  rest: 45,
   load: "Bodyweight, or the 25 lb across the hips.",
   name: "Glute bridge",
   cat: "Glutes",
@@ -663,6 +703,7 @@ gluteBridge: {
 },
 
 hipThrust: {
+  rest: 90,
   load: "The 25 lb single across the hips (towel underneath). Progress to 2 × 15 lb held side by side.",
   name: "Couch hip thrust",
   cat: "Glutes",
@@ -681,6 +722,7 @@ hipThrust: {
 },
 
 singleBridge: {
+  rest: 45,
   load: "Bodyweight first. Add the 15 lb across the hips once 8 reps a side is easy.",
   name: "Single-leg glute bridge",
   cat: "Glutes",
@@ -698,6 +740,7 @@ singleBridge: {
 },
 
 bandWalk: {
+  rest: 45,
   gear: "band", alt: "sideLying",
   name: "Banded lateral walk",
   cat: "Glutes",
@@ -715,6 +758,7 @@ bandWalk: {
 },
 
 birdDog: {
+  rest: 30,
   name: "Bird dog",
   cat: "Core",
   dose: "3 × 8/side",
@@ -731,6 +775,7 @@ birdDog: {
 },
 
 pallof: {
+  rest: 45,
   gear: "band", alt: "suitcase",
   name: "Band Pallof press",
   cat: "Core",
@@ -750,6 +795,7 @@ pallof: {
 
 /* ---------- CALISTHENICS ---------- */
 lsit: {
+  rest: 60,
   name: "L-sit progression",
   cat: "Calisthenics",
   dose: "5 × 10–20 sec",
@@ -768,6 +814,7 @@ lsit: {
 },
 
 pistol: {
+  rest: 90,
   load: "Hold the 8 lb out in front as a counterweight from level 3 onward.",
   name: "Pistol squat progression",
   cat: "Calisthenics",
@@ -787,6 +834,7 @@ pistol: {
 },
 
 bandRow: {
+  rest: 75,
   gear: "band", alt: "dbRow",
   name: "Band row",
   cat: "Calisthenics",
@@ -804,6 +852,7 @@ bandRow: {
 },
 
 bandPulldown: {
+  rest: 60,
   gear: "band", alt: "pullover",
   name: "Band lat pulldown",
   cat: "Calisthenics",
@@ -822,6 +871,7 @@ bandPulldown: {
 },
 
 scapPull: {
+  rest: 45,
   gear: "band", alt: "ytw",
   name: "Scapular pull (band)",
   cat: "Calisthenics",
@@ -840,6 +890,7 @@ scapPull: {
 },
 
 sideCrow: {
+  rest: 60,
   name: "Side crow",
   cat: "Skill",
   dose: "4 attempts/side",
@@ -858,6 +909,7 @@ sideCrow: {
 
 /* ---------- NO-BAND ALTERNATES (dumbbells / bodyweight only) ---------- */
 pullover: {
+  rest: 60,
   load: "One 8 lb held in both hands. This one should never feel heavy.",
   name: "Dumbbell pullover",
   cat: "Calisthenics",
@@ -876,6 +928,7 @@ pullover: {
 },
 
 sideLying: {
+  rest: 45,
   load: "Bodyweight. Rest the 8 lb on the thigh once 15 reps feel easy.",
   name: "Side-lying hip abduction",
   cat: "Glutes",
@@ -893,6 +946,7 @@ sideLying: {
 },
 
 suitcase: {
+  rest: 60,
   load: "The 25 lb single. Heavy is the point — your side core has to refuse to bend.",
   name: "Suitcase carry",
   cat: "Core",
@@ -911,6 +965,7 @@ suitcase: {
 },
 
 ytw: {
+  rest: 45,
   load: "No weight at first. The 8 lb pair only once all three letters feel easy.",
   name: "Prone Y-T-W raises",
   cat: "Calisthenics",
@@ -929,6 +984,7 @@ ytw: {
 },
 
 dbRow: {
+  rest: 75,
   load: "2 × 10 lb to start, 2 × 15 lb once 12 reps feel easy.",
   name: "Two-dumbbell bent-over row",
   cat: "Calisthenics",
@@ -945,6 +1001,88 @@ dbRow: {
   mistake: "Standing up a little on each rep. Set the hinge, then move only your arms.",
   vid: "two dumbbell bent over row form",
   fig: { hd:[24,48], nk:[32,50], hp:[64,50], el:[38,60], hn:[40,50], el2:[34,64], hn2:[36,54], kn:[68,72], ft:[70,92], props:["floor","bellDown"] }
+},
+
+/* ---------- YOGA WHEEL (12") — upgrades of drills you already do ---------- */
+wheelThoracic: {
+  rest: 0,
+  gear: "wheel", alt: "thoracic",
+  name: "Thoracic extension over the wheel",
+  cat: "Flexibility",
+  dose: "2–3 min",
+  load: "12\" yoga wheel",
+  why: "This is what the wheel is actually for, and it's better than the rolled-mat version you've been doing: the round shape lets your spine drape over a continuous curve instead of hinging at one point. A stiff upper back is what forces your low back to do the arching in a handstand, so this is a handstand drill as much as a flexibility one.",
+  how: ["Sit on the floor with the wheel behind you, touching your low back.",
+        "Place your hands behind your head, elbows wide, and lie back over the wheel.",
+        "Let your head and shoulders hang. Breathe into the stretch for 30 seconds.",
+        "Push gently with your feet to roll the wheel a few centimetres up or down your back, and repeat.",
+        "Work the whole upper and mid back. Stop before the wheel reaches your low back."],
+  cues: ["Keep the ribs from flaring — the extension should happen where the wheel is, not in the lumbar spine.",
+         "Exhale into each position; that's what lets the tissue give.",
+         "Hands behind the head supports the neck. Never let it dangle unsupported."],
+  mistake: "Rolling too low, into the low back. The wheel belongs between the shoulder blades and mid back.",
+  vid: "yoga wheel thoracic spine stretch",
+  fig: { hd:[24,62], nk:[32,64], hp:[62,72], el:[28,52], hn:[20,50], kn:[74,62], ft:[86,72], props:["floor80","wheel"] }
+},
+
+wheelPuppy: {
+  rest: 0,
+  gear: "wheel", alt: "puppy",
+  name: "Wheel puppy pose",
+  cat: "Flexibility",
+  dose: "3 × 45 sec",
+  load: "12\" yoga wheel",
+  why: "The single best shoulder-flexion drill you can do with a wheel, and shoulder flexion is the hard requirement for a straight handstand. Rolling the wheel away gives you a deeper, more controlled opening than the floor version — and you control the depth by how far you roll.",
+  how: ["Kneel with the wheel in front of you, hands on top of it.",
+        "Keep your hips stacked over your knees — they don't move.",
+        "Roll the wheel forward, letting your chest sink toward the floor between your arms.",
+        "Stop where it's a strong stretch but you can still breathe. Hold, then roll back."],
+  cues: ["Hips stay over the knees. Sliding back turns it into child's pose and loses the shoulder stretch.",
+         "Ribs down — if your low back arches, you've gone too far; roll back a little.",
+         "Arms stay straight. The stretch belongs in the armpits and lats."],
+  mistake: "Chasing depth by letting the ribs flare. Less range with the ribs tucked beats more with them open.",
+  vid: "yoga wheel puppy pose shoulder opener",
+  fig: { hd:[30,78], nk:[38,74], hp:[64,56], el:[28,80], hn:[16,84], kn:[66,78], ft:[80,84], props:["floor","wheelL"] }
+},
+
+wheelBridge: {
+  rest: 0,
+  gear: "wheel", alt: "bridge",
+  name: "Supported bridge over the wheel",
+  cat: "Flexibility",
+  dose: "3 × 30 sec",
+  load: "12\" yoga wheel",
+  why: "The honest on-ramp to a full wheel pose. The wheel holds you in the shape so your back can relax into it, instead of you fighting to hold a position your hip flexors won't allow yet. This is how the backbend comes back without straining the low back.",
+  how: ["Lie back over the wheel so it sits under your mid back, feet flat on the floor.",
+        "Let your arms fall overhead or out to the sides, whichever you can breathe in.",
+        "Relax completely and let gravity do the work for 30 seconds.",
+        "To come out: tuck the chin, plant the feet, and roll off to one side. Never sit straight up."],
+  cues: ["Squeeze the glutes lightly — it protects the low back and turns this into a hip-flexor stretch too.",
+         "If the low back pinches, walk the feet closer or move the wheel higher up your back.",
+         "Breathe slowly. This is a relax-into-it drill, not a push-into-it one."],
+  mistake: "Letting the wheel sit on the low back. It belongs under the mid back and shoulder blades.",
+  vid: "yoga wheel supported backbend beginner",
+  fig: { hd:[22,74], nk:[32,70], hp:[58,64], el:[24,64], hn:[14,60], kn:[72,68], ft:[78,92], props:["floor","wheel"] }
+},
+
+gobletSquat: {
+  rest: 90,
+  name: "Goblet squat",
+  cat: "Glutes",
+  dose: "3 × 12",
+  load: "The 25 lb single, held at your chest.",
+  rest: 90,
+  why: "Your heaviest bilateral leg exercise, and the reason your 25 lb single is worth owning. Held at the chest it loads the quads and glutes properly while the front-loading keeps you upright — which makes it far more forgiving on the low back than a barbell squat.",
+  how: ["Hold one dumbbell vertically against your chest, both hands cupping the top end.",
+        "Feet shoulder-width, toes slightly out.",
+        "Sit down between your heels, keeping your chest tall. Go as deep as you can with the heels down.",
+        "Drive through the whole foot to stand, squeezing the glutes at the top."],
+  cues: ["Elbows inside the knees at the bottom — they can gently push the knees apart.",
+         "Chest up, weight tight to the body. Letting it drift forward is what rounds your back.",
+         "Pause for a beat at the bottom rather than bouncing."],
+  mistake: "Cutting the depth short. Go as low as your ankles allow with the heels planted — that's where the glutes work.",
+  vid: "goblet squat proper form",
+  fig: { hd:[48,30], nk:[48,38], hp:[48,58], el:[42,44], hn:[46,42], el2:[54,44], hn2:[50,42], kn:[38,72], ft:[40,92], kn2:[58,72], ft2:[58,92], props:["floor"] }
 }
 };
 
@@ -971,13 +1109,13 @@ const BALANCE_A = [
 const SESSIONS = {
   daily: { id:"daily", name:"Daily 10", sub:"The floor — every day, including rest days", mins:10, color:"#5ee0b0",
     items: w => w<=4
-      ? [["wristPrep","2 min"],["dogHold","2 × 30 sec"],["deadBug","2 × 8/side"],["gluteBridge","2 × 12"],["puppy","2 min"]]
-      : [["wristPrep","2 min"],["boxPike","3 × 30 sec"],["hollow","3 × 20 sec"],["gluteBridge","2 × 12"],["puppy","2 min"]] },
+      ? [["wristPrep","2 min"],["dogHold","2 × 30 sec"],["deadBug","2 × 8/side"],["puppy","2 min"]]
+      : [["wristPrep","2 min"],["boxPike","2 × 30 sec"],["hollow","2 × 20 sec"],["puppy","2 min"]] },
 
-  A: { id:"A", name:"Day A — Skill", sub:"45 min · handstand, L-sit, arm balances. Do this fresh.", mins:45, color:"#7c9cff",
+  A: { id:"A", name:"Day A — Skill", sub:"Handstand, L-sit, arm balances. Do this fresh.", mins:45, color:"#7c9cff",
     items: w => w<=4 ? RELOAD_A : (w<=8 ? SKILL_A : BALANCE_A) },
 
-  B: { id:"B", name:"Day B — Strength", sub:"45 min · push, pull, legs — calisthenics-flavoured", mins:45, color:"#f0b45e",
+  B: { id:"B", name:"Day B — Strength", sub:"Push, pull, legs — calisthenics-flavoured", mins:45, color:"#f0b45e",
     items: w => (w<=4
       ? [["wristPrep","2 min"],["inclinePush","3 × 8–10"],["dbRow","3 × 12"],["rdl","3 × 10"],["ohp","3 × 8, light"],
          ["bandPulldown","3 × 12"],["pistol","3 × 5/side, high surface"],
@@ -986,18 +1124,18 @@ const SESSIONS = {
          ["boxPikePush","3 × 6"],["scapPull","3 × 10"],["bandPulldown","3 × 12"],
          ["pistol","3 × 6–8/side"],["rdl","3 × 10"],["carry","3 × 40 sec"]]) },
 
-  C: { id:"C", name:"Day C — Cardio", sub:"30–40 min · zone 2, no decisions required", mins:35, color:"#e08b8b",
+  C: { id:"C", name:"Day C — Cardio", sub:"Zone 2, no decisions required", mins:35, color:"#e08b8b",
     items: [["cardio","30–40 min"]] },
 
-  D: { id:"D", name:"Day D — Flexibility", sub:"45 min · optional but this is how you get it back", mins:45, color:"#b98bde",
+  D: { id:"D", name:"Day D — Flexibility", sub:"Optional, but this is how you get it back", mins:45, color:"#b98bde",
     items: [["jefferson","3 × 8"],["pigeon","90 sec/side"],["couch","90 sec/side"],["dislocates","3 × 10"],
-            ["puppy","90 sec"],["thoracic","2 min"],["thread","60 sec/side"],
-            ["ankle","2 × 60 sec/side"],["bridge","3 × 25 sec"]] },
+            ["wheelPuppy","3 × 45 sec"],["wheelThoracic","2–3 min"],["thread","60 sec/side"],
+            ["ankle","2 × 60 sec/side"],["wheelBridge","3 × 30 sec"]] },
 
-  E: { id:"E", name:"Day E — Glutes + core", sub:"20–25 min · short, and it feeds the handstand", mins:22, color:"#7ad4c8",
-    items: [["gluteBridge","3 × 12"],["hipThrust","3 × 10"],["singleBridge","3 × 8/side"],
-            ["bandWalk","3 × 12/direction"],["birdDog","3 × 8/side"],["pallof","3 × 8/side"],
-            ["sidePlank","3 × 20 sec/side"]] }
+  E: { id:"E", name:"Day E — Glutes + weights", sub:"Your loaded day — heaviest weights of the week", mins:45, color:"#7ad4c8",
+    items:[["gluteBridge","2 × 15, warm-up"],["hipThrust","4 × 10"],["gobletSquat","3 × 12"],
+           ["singleBridge","3 × 8/side"],["sideLying","3 × 15/side"],["birdDog","3 × 8/side"],
+           ["suitcase","3 × 40 sec/side"],["sidePlank","3 × 20 sec/side"]] }
 };
 
 /* Stage 1 is where you actually are today; nobody skips it. */
